@@ -32,6 +32,10 @@ class _BodyProfileState extends State<BodyProfile> {
               FluttermojiCustomizer(),
             ],
           ),
+          ElevatedButton(
+            onPressed: () => setAvatar(context),
+            child: Text('save'),
+          ),
           // Align(
           //   alignment: Alignment.center,
           //   child: Container(
@@ -55,6 +59,10 @@ class _BodyProfileState extends State<BodyProfile> {
 
   void setAvatar(BuildContext context) async {
     String localBitmoji = await FluttermojiFunctions().encodeMySVGtoString();
-    context.read<UserCubit>().add(User(id: 1, avatar: localBitmoji));
+    context.read<UserCubit>().add(User(
+          id: 1,
+          avatar: localBitmoji,
+          pseudo: 'Henri',
+        ));
   }
 }
