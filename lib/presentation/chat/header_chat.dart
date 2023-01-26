@@ -12,7 +12,17 @@ class HeaderChat extends StatelessWidget {
           child: Icon(Icons.account_circle),
         ),
         Icon(Icons.search),
-        Expanded(child: Center(child: Text('Chat'))),
+        Expanded(
+          child: Center(
+            child: Text(
+              'Chat',
+              style: TextStyle(
+                fontWeight: FontWeight.w800,
+                fontSize: 20,
+              ),
+            ),
+          ),
+        ),
         Icon(Icons.add),
         Padding(
           padding: EdgeInsets.all(8.0),
