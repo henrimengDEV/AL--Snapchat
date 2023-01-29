@@ -18,8 +18,6 @@ class _BodyStoryState extends State<BodyStory> {
     );
   }
 
-  _foo() {}
-
   _showSimpleModalDialog(context) {
     showModalBottomSheet(
       context: context,

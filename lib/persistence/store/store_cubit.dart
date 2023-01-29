@@ -55,4 +55,17 @@ class StoreCubit extends Cubit<StoreState> {
           friend: state.friend,
         ),
       );
+
+  void updateCurrentUser(User user) {
+    emit(
+        StoreState(
+          user: UserCubit(
+            entity: state.user.entity,
+            entities: state.user.entities,
+            currentUser: user,
+          ),
+          friend: state.friend,
+        )
+    )
+  }
 }
