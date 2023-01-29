@@ -20,12 +20,30 @@ class StoreCubit extends Cubit<StoreState> {
           friend: [],
         ));
 
-  void addFriend(Friend friend) => emit(
-        StoreState(
-          user: state.user,
-          friend: [...state.friend, friend],
-        ),
-      );
+  List<User> getFriendsOfCurrentUser() {
+    return state.user.entities
+        .where((user) => !state.friend.any((element) =>
+            element.firstUserId == state.user.currentUser.id &&
+            element.secondUserId == user.id))
+        .toList();
+  }
+
+  void addFriend(Friend friend) {
+    final bool areAlreadyFriend = state.friend.any(
+      (element) =>
+          element.firstUserId == state.user.currentUser.id &&
+          element.secondUserId == friend.secondUserId,
+    );
+
+    if (areAlreadyFriend) return;
+
+    emit(
+      StoreState(
+        user: state.user,
+        friend: [...state.friend, friend],
+      ),
+    );
+  }
 
   void addUser(User user) => emit(
         StoreState(

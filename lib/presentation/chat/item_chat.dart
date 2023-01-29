@@ -1,6 +1,7 @@
 import 'package:final_flutter_project/domain/user.dart';
 import 'package:final_flutter_project/presentation/shared/snap_avatar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ItemChat extends StatelessWidget {
   final User item;
@@ -21,7 +22,7 @@ class ItemChat extends StatelessWidget {
       style: buttonStyle,
       child: Row(
         children: [
-          SnapAvatar(avatar: item.avatar!),
+          _getAvatar(context),
           Expanded(
             child: Text(
               item.pseudo,
@@ -32,5 +33,13 @@ class ItemChat extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget _getAvatar(context) {
+    if (item.avatar == null) {
+      return SvgPicture.defaultPlaceholderBuilder(context);
+    }
+
+    return SnapAvatar(avatar: item.avatar!);
   }
 }

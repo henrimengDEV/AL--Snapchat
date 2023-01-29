@@ -43,6 +43,7 @@ class _BodyProfileState extends State<BodyProfile> {
 
   void setAvatar(BuildContext context) async {
     String localBitmoji = await FluttermojiFunctions().encodeMySVGtoString();
+    print(localBitmoji);
     context.read<StoreCubit>().addUser(User(
           id: 1,
           avatar: localBitmoji,

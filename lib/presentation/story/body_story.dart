@@ -1,8 +1,4 @@
-import 'package:final_flutter_project/domain/friend.dart';
-import 'package:final_flutter_project/persistence/store/friend_cubit.dart';
-import 'package:final_flutter_project/persistence/store/store_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BodyStory extends StatefulWidget {
   const BodyStory({super.key});
@@ -22,57 +18,13 @@ class _BodyStoryState extends State<BodyStory> {
     );
   }
 
-  _foo() {
-
-  }
+  _foo() {}
 
   _showSimpleModalDialog(context) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      builder: (context) => SingleChildScrollView(
-        child: Row(
-          children: [
-            Column(
-              children: [
-                Text('Users'),
-                BlocBuilder<StoreCubit, StoreState>(
-                  builder: (context, store) => Column(
-                    children: store.user.entities
-                        .map((user) => ElevatedButton(
-                              onPressed: () {
-                                context.read<StoreCubit>().addFriend(Friend(
-                                      id: 2000,
-                                      firstUserId: store.user.currentUser.id,
-                                      secondUserId: user.id,
-                                    ));
-                              },
-                              child: Text(user.pseudo),
-                            ))
-                        .toList(),
-                  ),
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                Text('Friends'),
-                BlocBuilder<StoreCubit, StoreState>(
-                  builder: (context, store) => Column(
-                    children: store.friend
-                        .map((friend) => ElevatedButton(
-                              onPressed: () {},
-                              child: Text(
-                                  '${friend.firstUserId} with ${friend.secondUserId}'),
-                            ))
-                        .toList(),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+      builder: (context) => const Center(child: Text('Coming soon')),
     );
   }
 }

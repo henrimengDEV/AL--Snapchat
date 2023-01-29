@@ -14,13 +14,20 @@ class BodyChat extends StatelessWidget {
         child: Column(
           children: [
             const HeaderChat(),
-            BlocBuilder<StoreCubit, StoreState>(
-              builder: (context, store) => Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: store.user.entities.map((item) => ItemChat(item: item),).toList(),
-                ),
-              ),
+            const SizedBox(height: 20),
+            Column(
+              children: context
+                  .read<StoreCubit>()
+                  .getFriendsOfCurrentUser()
+                  .map(
+                    (item) => Column(
+                      children: [
+                        ItemChat(item: item),
+                        const Divider(thickness: 1, height: 0),
+                      ],
+                    ),
+                  )
+                  .toList(),
             ),
           ],
         ),
