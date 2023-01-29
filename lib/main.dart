@@ -2,6 +2,7 @@ import 'package:final_flutter_project/persistence/camera_provider.dart';
 import 'package:final_flutter_project/persistence/store/user_cubit.dart';
 import 'package:final_flutter_project/presentation/camera/screen_camera.dart';
 import 'package:final_flutter_project/presentation/chat/screen_chat.dart';
+import 'package:final_flutter_project/presentation/screen_snapchat.dart';
 import 'package:final_flutter_project/presentation/map/screen_map.dart';
 import 'package:final_flutter_project/presentation/page_not_found.dart';
 import 'package:final_flutter_project/presentation/profile/screen_profile.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
           ScreenProfile.routeName: (BuildContext context) => const ScreenProfile(),
         },
         onGenerateRoute: (RouteSettings settings) {
-          Widget screen = const PageNotFound();
+          Widget screen = const ScreenSnapchat();
 
           switch (settings.name) {
             case ScreenMap.routeName:

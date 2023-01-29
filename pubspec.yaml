@@ -78,6 +78,7 @@ flutter:
    - assets/images/bitmoji1.png
    - assets/images/bitmoji2.png
    - assets/images/bitmoji3.png
+   - assets/images/snapchat.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
