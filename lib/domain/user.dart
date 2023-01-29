@@ -8,4 +8,12 @@ class User {
     this.avatar,
     required this.pseudo,
   });
+
+  // User copyAndChange() {
+  //   return User(
+  //     name: name,
+  //     isSelected: !isSelected,
+  //     lastUpdatedDate: DateTime.now(),
+  //   );
+  // }
 }
