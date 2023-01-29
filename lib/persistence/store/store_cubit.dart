@@ -66,6 +66,6 @@ class StoreCubit extends Cubit<StoreState> {
           ),
           friend: state.friend,
         )
-    )
+    );
   }
 }
