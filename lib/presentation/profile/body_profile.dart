@@ -1,6 +1,6 @@
 import 'package:final_flutter_project/domain/user.dart';
+import 'package:final_flutter_project/persistence/store/store_cubit.dart';
 import 'package:final_flutter_project/persistence/store/user_cubit.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttermoji/fluttermoji.dart';
@@ -36,22 +36,6 @@ class _BodyProfileState extends State<BodyProfile> {
             onPressed: () => setAvatar(context),
             child: Text('save'),
           ),
-          // Align(
-          //   alignment: Alignment.center,
-          //   child: Container(
-          //     color: Colors.black38,
-          //     width: double.infinity,
-          //     height: double.infinity,
-          //     child: const CupertinoAlertDialog(
-          //       title: Text('Modification detected'),
-          //       content: Text('Do you want to save your new Avatar ?'),
-          //       actions: [
-          //         CupertinoDialogAction(child: Text('No')),
-          //         CupertinoDialogAction(child: Text('Yes')),
-          //       ],
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );
@@ -59,7 +43,7 @@ class _BodyProfileState extends State<BodyProfile> {
 
   void setAvatar(BuildContext context) async {
     String localBitmoji = await FluttermojiFunctions().encodeMySVGtoString();
-    context.read<UserCubit>().add(User(
+    context.read<StoreCubit>().addUser(User(
           id: 1,
           avatar: localBitmoji,
           pseudo: 'Henri',

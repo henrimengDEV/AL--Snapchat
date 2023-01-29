@@ -1,4 +1,7 @@
 import 'package:final_flutter_project/persistence/camera_provider.dart';
+import 'package:final_flutter_project/persistence/store/friend_cubit.dart';
+import 'package:final_flutter_project/persistence/store/store_cubit.dart';
+import 'package:final_flutter_project/persistence/store/user_cubit.dart';
 import 'package:final_flutter_project/persistence/store/user_cubit.dart';
 import 'package:final_flutter_project/presentation/camera/screen_camera.dart';
 import 'package:final_flutter_project/presentation/chat/screen_chat.dart';
@@ -21,15 +24,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => UserCubit(),
+      create: (_) => StoreCubit(),
       child: MaterialApp(
         title: 'Flutter Demo',
         routes: {
           ScreenMap.routeName: (BuildContext context) => const ScreenMap(),
           ScreenChat.routeName: (BuildContext context) => const ScreenChat(),
-          ScreenCamera.routeName: (BuildContext context) => const ScreenCamera(),
+          ScreenCamera.routeName: (BuildContext context) =>
+              const ScreenCamera(),
           ScreenStory.routeName: (BuildContext context) => const ScreenStory(),
-          ScreenProfile.routeName: (BuildContext context) => const ScreenProfile(),
+          ScreenProfile.routeName: (BuildContext context) =>
+              const ScreenProfile(),
         },
         onGenerateRoute: (RouteSettings settings) {
           Widget screen = const PageNotFound();
