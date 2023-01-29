@@ -1,4 +1,5 @@
 import 'package:final_flutter_project/presentation/shared/snap_bottom_bar.dart';
+import 'package:final_flutter_project/presentation/story/body_story.dart';
 import 'package:flutter/material.dart';
 
 class ScreenStory extends StatelessWidget {
@@ -8,14 +9,9 @@ class ScreenStory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Expanded(child: Container(color: Colors.cyan)),
-          Container(height: 50, color: Colors.blue),
-        ],
-      ),
-      bottomNavigationBar: const SnapBottomBar(routeActivated: routeName)
+    return const Scaffold(
+      body: BodyStory(),
+      bottomNavigationBar: SnapBottomBar(routeActivated: routeName)
     );
   }
 }
