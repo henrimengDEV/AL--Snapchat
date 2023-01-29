@@ -1,4 +1,5 @@
 import 'package:final_flutter_project/domain/user.dart';
+import 'package:final_flutter_project/presentation/conversation/screen_conversation.dart';
 import 'package:final_flutter_project/presentation/shared/snap_avatar.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,12 @@ class ItemChat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () => {},
+      onPressed: () => {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ScreenConversation()),
+        )
+      },
       style: buttonStyle,
       child: Row(
         children: [
