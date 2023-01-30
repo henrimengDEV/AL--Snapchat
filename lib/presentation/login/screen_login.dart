@@ -1,5 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../camera/screen_camera.dart';
+import 'form_login.dart';
 
 class ScreenLogin extends StatelessWidget {
   const ScreenLogin({Key? key}) : super(key: key);
@@ -7,8 +9,23 @@ class ScreenLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text("bonjour")),
-
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(30),
+          child: Column(
+            children: [
+              Expanded(child: FormLogin()),
+              ElevatedButton(onPressed: () => {
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ScreenCamera()),
+              )
+              }, child: Text("Log In")),
+            ],
+          ),
+        ),
+      ),
     );
   }
+
 }

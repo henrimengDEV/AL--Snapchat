@@ -1,10 +1,9 @@
-import 'package:final_flutter_project/presentation/sign_up/screen_sign_up.dart';
+import 'package:final_flutter_project/presentation/login/screen_sign_up.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'camera/screen_camera.dart';
 import 'login/screen_login.dart';
-import 'shared/snap_button.dart';
 
 class ScreenSnapchat extends StatelessWidget {
   const ScreenSnapchat({Key? key}) : super(key: key);
@@ -40,18 +39,16 @@ class ScreenSnapchat extends StatelessWidget {
   _goBack(BuildContext context) {
     Navigator.of(context).pushNamed(ScreenCamera.routeName);
   }
-
   _goLogin(BuildContext context) {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const ScreenLogin()),
     );
   }
-
   _goSignup(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const ScreenSignUp()),
+      MaterialPageRoute(builder: (context) => const ScreenSignUp())
     );
   }
 }
