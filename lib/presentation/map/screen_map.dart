@@ -1,5 +1,4 @@
 import 'package:final_flutter_project/domain/user.dart';
-import 'package:final_flutter_project/persistence/store/user_cubit.dart';
 import 'package:final_flutter_project/presentation/map/body_map.dart';
 import 'package:final_flutter_project/presentation/shared/snap_bottom_bar.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +12,9 @@ class ScreenMap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: BodyMap(),
-      bottomNavigationBar: const SnapBottomBar(routeActivated: routeName),
+      bottomNavigationBar: SnapBottomBar(routeActivated: routeName),
     );
   }
 

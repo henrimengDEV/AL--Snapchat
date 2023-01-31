@@ -1,9 +1,9 @@
-import 'package:final_flutter_project/presentation/login/screen_sign_up.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'auth/login/screen_login.dart';
+import 'auth/sign_up/screen_sign_up.dart';
 import 'camera/screen_camera.dart';
-import 'login/screen_login.dart';
 
 class ScreenSnapchat extends StatelessWidget {
   const ScreenSnapchat({Key? key}) : super(key: key);
@@ -17,17 +17,49 @@ class ScreenSnapchat extends StatelessWidget {
           children: [
             Expanded(
               child: Center(
-                child: Image.asset('assets/images/snapchat.png', height: 150, width: 150),
+                child: Image.asset('assets/images/snapchat.png',
+                    height: 150, width: 150),
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                    onPressed: () => _goBack(context), child: Text("SKIP")),
-                ElevatedButton(onPressed: () => _goLogin(context), child: Text("Log In")),
+                  onPressed: () => _goLogin(context),
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  ),
+                  child: const Text(
+                    "Log In",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
                 SizedBox(width: 20),
-                ElevatedButton(onPressed: () => _goSignup(context), child: Text("Sign Up")),
+                ElevatedButton(
+                  onPressed: () => _goSignup(context),
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    "Sign Up",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ],
             )
           ],
@@ -39,16 +71,12 @@ class ScreenSnapchat extends StatelessWidget {
   _goBack(BuildContext context) {
     Navigator.of(context).pushNamed(ScreenCamera.routeName);
   }
+
   _goLogin(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const ScreenLogin()),
-    );
+    Navigator.of(context).pushNamed(ScreenLogin.routeName);
   }
+
   _goSignup(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const ScreenSignUp())
-    );
+    Navigator.of(context).pushNamed(ScreenSignUp.routeName);
   }
 }

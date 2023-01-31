@@ -63,6 +63,7 @@ class _BodyProfileState extends State<BodyProfile> {
           id: 1,
           avatar: localBitmoji,
           pseudo: 'Henri',
+
         ));
   }
 }
