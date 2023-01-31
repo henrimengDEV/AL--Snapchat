@@ -17,7 +17,7 @@ class SnapAvatar extends StatelessWidget {
       width: 50,
       padding: const EdgeInsets.all(5),
       decoration: const BoxDecoration(
-        color: Colors.grey,
+        color: Colors.transparent,
         shape: BoxShape.circle,
       ),
       child: SvgPicture.string(

@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ScreenConversation extends StatelessWidget {
+  static const routeName = 'screen_conversation';
+
   const ScreenConversation({Key? key}) : super(key: key);
 
   @override

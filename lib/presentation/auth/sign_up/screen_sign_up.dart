@@ -5,8 +5,8 @@ import '../form_birthday/screen_birthday.dart';
 
 class ScreenSignUp extends StatelessWidget {
   static const routeName = 'screen_sign_up';
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
 
   ScreenSignUp({Key? key}) : super(key: key);
 

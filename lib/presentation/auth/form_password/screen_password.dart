@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 
 class ScreenPassword extends StatelessWidget {
-  TextEditingController passwordController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   static const routeName = 'screen_password';
 
   ScreenPassword({Key? key}) : super(key: key);

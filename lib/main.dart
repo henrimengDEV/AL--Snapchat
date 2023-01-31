@@ -1,4 +1,7 @@
 import 'package:final_flutter_project/persistence/camera_provider.dart';
+import 'package:final_flutter_project/persistence/store/friend_cubit.dart';
+import 'package:final_flutter_project/persistence/store/store_cubit.dart';
+import 'package:final_flutter_project/persistence/store/user_cubit.dart';
 import 'package:final_flutter_project/persistence/store/user_cubit.dart';
 import 'package:final_flutter_project/presentation/auth/form_birthday/screen_birthday.dart';
 import 'package:final_flutter_project/presentation/auth/form_password/screen_password.dart';
@@ -10,6 +13,7 @@ import 'package:final_flutter_project/presentation/chat/screen_chat.dart';
 import 'package:final_flutter_project/presentation/conversation/screen_conversation.dart';
 import 'package:final_flutter_project/presentation/screen_snapchat.dart';
 import 'package:final_flutter_project/presentation/map/screen_map.dart';
+import 'package:final_flutter_project/presentation/page_not_found.dart';
 import 'package:final_flutter_project/presentation/profile/screen_profile.dart';
 import 'package:final_flutter_project/presentation/story/screen_story.dart';
 import 'package:flutter/material.dart';
@@ -27,25 +31,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => UserCubit(),
+      create: (_) => StoreCubit(),
       child: MaterialApp(
         title: 'Flutter Demo',
         routes: {
-          ScreenMap.routeName: (BuildContext context) => const ScreenMap(),
-          ScreenChat.routeName: (BuildContext context) => const ScreenChat(),
-          ScreenCamera.routeName: (BuildContext context) => const ScreenCamera(),
-          ScreenStory.routeName: (BuildContext context) => const ScreenStory(),
-          ScreenProfile.routeName: (BuildContext context) => const ScreenProfile(),
-          ScreenLogin.routeName: (BuildContext context) => ScreenLogin(),
-          ScreenSignUp.routeName: (BuildContext context) => ScreenSignUp(),
-          ScreenBirthday.routeName: (BuildContext context) => ScreenBirthday(),
-          ScreenUsername.routeName: (BuildContext context) => ScreenUsername(),
-          ScreenPassword.routeName: (BuildContext context) => ScreenPassword(),
-          ScreenMap.routeName: (BuildContext context) => const ScreenMap(),
-          ScreenConversation.routeName: (BuildContext context) => const ScreenConversation(),
+          ScreenMap.routeName: (_) => const ScreenMap(),
+          ScreenChat.routeName: (_) => const ScreenChat(),
+          ScreenCamera.routeName: (_) => const ScreenCamera(),
+          ScreenStory.routeName: (_) => const ScreenStory(),
+          ScreenProfile.routeName: (_) => const ScreenProfile(),
+          ScreenLogin.routeName: (_) => ScreenLogin(),
+          ScreenSignUp.routeName: (_) => ScreenSignUp(),
+          ScreenBirthday.routeName: (_) => ScreenBirthday(),
+          ScreenUsername.routeName: (_) => ScreenUsername(),
+          ScreenPassword.routeName: (_) => ScreenPassword(),
+          ScreenConversation.routeName: (_) => const ScreenConversation(),
         },
         onGenerateRoute: (RouteSettings settings) {
-          Widget screen = const ScreenSnapchat();
+          Widget screen = const PageNotFound();
 
           switch (settings.name) {
             case ScreenMap.routeName:

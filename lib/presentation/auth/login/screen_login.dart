@@ -5,8 +5,8 @@ import '../../camera/screen_camera.dart';
 
 class ScreenLogin extends StatelessWidget {
   static const routeName = 'screen_login';
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   ScreenLogin({Key? key}) : super(key: key);
 
