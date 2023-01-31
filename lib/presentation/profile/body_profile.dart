@@ -1,6 +1,7 @@
 import 'package:final_flutter_project/domain/user.dart';
 import 'package:final_flutter_project/persistence/store/store_cubit.dart';
 import 'package:final_flutter_project/persistence/store/user_cubit.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttermoji/fluttermoji.dart';
@@ -43,9 +44,11 @@ class _BodyProfileState extends State<BodyProfile> {
 
   void setAvatar(BuildContext context) async {
     String localBitmoji = await FluttermojiFunctions().encodeMySVGtoString();
-    print(localBitmoji);
-    context.read<StoreCubit>().updateCurrentUser(
-        context.read<StoreCubit>().state.user.currentUser
-    );
+    context.read<StoreCubit>().addUser(User(
+          id: 1,
+          avatar: localBitmoji,
+          pseudo: 'Henri',
+
+        ));
   }
 }
