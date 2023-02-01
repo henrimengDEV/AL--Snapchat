@@ -52,8 +52,8 @@ class MyApp extends StatelessWidget {
               const ScreenProfile(),
         },
         onGenerateRoute: (RouteSettings settings) {
-          Widget screen = const ScreenSnapchat();
           // Widget screen = const PageNotFound();
+          Widget screen = const ScreenSnapchat();
 
           switch (settings.name) {
             case ScreenConversation.routeName:
