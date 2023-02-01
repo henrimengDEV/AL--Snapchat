@@ -1,3 +1,4 @@
+import 'package:final_flutter_project/presentation/shared/snap_icon.dart';
 import 'package:flutter/material.dart';
 
 class HeaderChat extends StatelessWidget {
@@ -9,9 +10,9 @@ class HeaderChat extends StatelessWidget {
       children: const [
         Padding(
           padding: EdgeInsets.all(8.0),
-          child: Icon(Icons.account_circle),
+          child: SnapIcon(icon: Icons.account_circle),
         ),
-        Icon(Icons.search),
+        SnapIcon(icon: Icons.search),
         Expanded(
           child: Center(
             child: Text(
@@ -23,10 +24,10 @@ class HeaderChat extends StatelessWidget {
             ),
           ),
         ),
-        Icon(Icons.add),
+        SnapIcon(icon: Icons.add),
         Padding(
           padding: EdgeInsets.all(8.0),
-          child: Icon(Icons.edit),
+          child: SnapIcon(icon: Icons.edit),
         ),
       ],
     );

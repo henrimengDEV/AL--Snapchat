@@ -1,6 +1,8 @@
 import 'package:final_flutter_project/persistence/camera_provider.dart';
-import 'package:final_flutter_project/persistence/store/friend_cubit.dart';
+import 'package:final_flutter_project/persistence/store/friend_state.dart';
 import 'package:final_flutter_project/persistence/store/store_cubit.dart';
+import 'package:final_flutter_project/persistence/store/user_state.dart';
+import 'package:final_flutter_project/persistence/store/user_state.dart';
 import 'package:final_flutter_project/persistence/store/user_cubit.dart';
 import 'package:final_flutter_project/persistence/store/user_cubit.dart';
 import 'package:final_flutter_project/presentation/auth/form_birthday/screen_birthday.dart';
@@ -14,6 +16,7 @@ import 'package:final_flutter_project/presentation/conversation/screen_conversat
 import 'package:final_flutter_project/presentation/screen_snapchat.dart';
 import 'package:final_flutter_project/presentation/map/screen_map.dart';
 import 'package:final_flutter_project/presentation/page_not_found.dart';
+import 'package:final_flutter_project/presentation/profile/bitmoji/screen_bitmoji.dart';
 import 'package:final_flutter_project/presentation/profile/screen_profile.dart';
 import 'package:final_flutter_project/presentation/story/screen_story.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +49,11 @@ class MyApp extends StatelessWidget {
           ScreenUsername.routeName: (_) => ScreenUsername(),
           ScreenPassword.routeName: (_) => ScreenPassword(),
           ScreenConversation.routeName: (_) => const ScreenConversation(),
+          ScreenBitmoji.routeName: (BuildContext context) =>
+              const ScreenBitmoji(),
+          ScreenStory.routeName: (BuildContext context) => const ScreenStory(),
+          ScreenProfile.routeName: (BuildContext context) =>
+              const ScreenProfile(),
         },
         onGenerateRoute: (RouteSettings settings) {
           Widget screen = const PageNotFound();
@@ -80,6 +88,9 @@ class MyApp extends StatelessWidget {
               break;
             case ScreenPassword.routeName:
               screen =  ScreenPassword();
+              break;
+            case ScreenBitmoji.routeName:
+              screen = const ScreenBitmoji();
               break;
           }
 

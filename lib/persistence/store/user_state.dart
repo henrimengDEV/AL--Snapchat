@@ -1,17 +1,17 @@
 import 'package:final_flutter_project/domain/user.dart';
 
-class UserCubit {
+class UserState {
   final User? entity;
   final List<User> entities;
   final User currentUser;
 
-  UserCubit({
+  UserState({
     this.entity,
     required this.entities,
     required this.currentUser,
   });
 
-  static UserCubit initialState = UserCubit(
+  static UserState initialState = UserState(
     entities: [
       User(id: 1000, pseudo: 'Teemo', avatar: defaultAvatar),
       User(id: 1001, pseudo: 'Annie', avatar: defaultAvatar),
@@ -31,7 +31,7 @@ class UserCubit {
       User(id: 1015, pseudo: 'Lulu', avatar: defaultAvatar),
       User(id: 1016, pseudo: 'Blitzcrank', avatar: defaultAvatar),
     ],
-    currentUser: User(id: 1015, pseudo: 'Lulu'),
+    currentUser: User(id: 1015, pseudo: 'Lulu', avatar: defaultAvatar),
   );
 
   static String get defaultAvatar => '{"topType":7,"accessoriesType":0,"hairColor":1,"facialHairType":0,"facialHairColor":1,"clotheType":0,"eyeType":0,"eyebrowType":0,"mouthType":8,"skinColor":1,"clotheColor":5,"style":0,"graphicType":0}';

@@ -1,5 +1,5 @@
 import 'package:final_flutter_project/presentation/conversation/feed_conversation.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'footer_conversation.dart';
 import 'header_conversation.dart';
@@ -9,11 +9,14 @@ class BodyConversation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
       child: Column(
-        children: [
+        children: const [
           HeaderConversation(),
-          FeedConversation(),
+          Divider(thickness: 1),
+          Expanded(child: FeedConversation()),
+          Divider(thickness: 1),
           FooterConversation(),
         ],
       ),

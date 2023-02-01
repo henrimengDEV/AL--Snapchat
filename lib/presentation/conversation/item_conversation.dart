@@ -1,24 +1,50 @@
+import 'package:final_flutter_project/domain/message.dart';
+import 'package:final_flutter_project/persistence/store/store_cubit.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ItemConversation extends StatelessWidget {
-  const ItemConversation({Key? key}) : super(key: key);
+  final Message message;
+
+  const ItemConversation({
+    Key? key,
+    required this.message,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(5.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("Nom"),
-          Row(
-            children: [
-              Text(" | "),
-              Text("MESSAGES"),
-            ],
+    final bool isMe =
+        message.userId == context.read<StoreCubit>().state.user.currentUser.id;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          isMe ? 'Me'.toUpperCase() : '${message.userId}',
+          style: TextStyle(
+            color: isMe ? Colors.red : Colors.blueAccent,
+            fontSize: 12,
           ),
-        ],
-      ),
+        ),
+        IntrinsicHeight(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 2),
+            child: Row(
+              children: [
+                Container(
+                  color: isMe ? Colors.red : Colors.blueAccent,
+                  width: 2,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Text(message.text),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

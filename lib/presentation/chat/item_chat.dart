@@ -22,7 +22,11 @@ class ItemChat extends StatelessWidget {
       onPressed: () => {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const ScreenConversation()),
+          MaterialPageRoute(
+            builder: (context) => ScreenConversation(
+              userId: item.id,
+            ),
+          ),
         )
       },
       style: buttonStyle,
