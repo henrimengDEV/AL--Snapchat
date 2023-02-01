@@ -19,16 +19,7 @@ class ItemChat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () => {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ScreenConversation(
-              userId: item.id,
-            ),
-          ),
-        )
-      },
+      onPressed: () => _goToScreenConversation(context),
       style: buttonStyle,
       child: Row(
         children: [
@@ -42,6 +33,13 @@ class ItemChat extends StatelessWidget {
           const Icon(Icons.messenger_outline),
         ],
       ),
+    );
+  }
+
+  _goToScreenConversation(BuildContext context) {
+    Navigator.of(context).pushNamed(
+      ScreenConversation.routeName,
+      arguments: item.id,
     );
   }
 
