@@ -1,14 +1,19 @@
 import 'package:final_flutter_project/domain/friend.dart';
+import 'package:final_flutter_project/domain/message.dart';
 import 'package:final_flutter_project/domain/user.dart';
-import 'package:final_flutter_project/persistence/store/user_cubit.dart';
+import 'package:final_flutter_project/persistence/store/friend_state.dart';
+import 'package:final_flutter_project/persistence/store/message_state.dart';
+import 'package:final_flutter_project/persistence/store/user_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class StoreState {
-  final UserCubit user;
-  final List<Friend> friend;
+  final UserState user;
+  final MessageState message;
+  final FriendState friend;
 
   StoreState({
     required this.user,
+    required this.message,
     required this.friend,
   });
 }
@@ -16,23 +21,32 @@ class StoreState {
 class StoreCubit extends Cubit<StoreState> {
   StoreCubit()
       : super(StoreState(
-          user: UserCubit.initialState,
-          friend: [],
+          user: UserState.initialState,
+          message: MessageState.initialState,
+          friend: FriendState.initialState,
         ));
 
   List<User> getFriendsOfCurrentUser() {
     return state.user.entities
-        .where((user) => !state.friend.any((element) =>
+        .where((user) => state.friend.entities.any((element) =>
             element.firstUserId == state.user.currentUser.id &&
             element.secondUserId == user.id))
         .toList();
   }
 
-  void addFriend(Friend friend) {
-    final bool areAlreadyFriend = state.friend.any(
+  List<User> getFriendSuggestionsOfCurrentUser() {
+    return state.user.entities
+        .where((user) => !state.friend.entities.any((element) =>
+            element.firstUserId == state.user.currentUser.id &&
+            element.secondUserId == user.id))
+        .toList();
+  }
+
+  addFriend(User user) {
+    final bool areAlreadyFriend = state.friend.entities.any(
       (element) =>
           element.firstUserId == state.user.currentUser.id &&
-          element.secondUserId == friend.secondUserId,
+          element.secondUserId == user.id,
     );
 
     if (areAlreadyFriend) return;
@@ -40,32 +54,86 @@ class StoreCubit extends Cubit<StoreState> {
     emit(
       StoreState(
         user: state.user,
-        friend: [...state.friend, friend],
+        friend: FriendState(
+          entities: [
+            ...state.friend.entities,
+            Friend(
+              id: 1,
+              firstUserId: state.user.currentUser.id,
+              secondUserId: user.id,
+            )
+          ],
+          entity: state.friend.entity,
+        ),
+        message: state.message,
       ),
     );
   }
 
-  void addUser(User user) => emit(
+  addUser(User user) => emit(
         StoreState(
-          user: UserCubit(
+          user: UserState(
             entity: state.user.entity,
             entities: [...state.user.entities, user],
             currentUser: state.user.currentUser,
           ),
           friend: state.friend,
+          message: state.message,
         ),
       );
 
-  void updateCurrentUser(User user) {
+  updateCurrentUser(User user) {
+    emit(StoreState(
+      user: UserState(
+        entity: state.user.entity,
+        entities: state.user.entities,
+        currentUser: user,
+      ),
+      friend: state.friend,
+      message: state.message,
+    ));
+  }
+
+  updateCurrentFriend(int userId) {
+    emit(StoreState(
+      user: state.user,
+      friend: FriendState(
+        entities: state.friend.entities,
+        entity: state.friend.entities.firstWhere(
+          (element) =>
+              (element.firstUserId == state.user.currentUser.id &&
+                  element.secondUserId == userId) ||
+              (element.firstUserId == userId &&
+                  element.secondUserId == state.user.currentUser.id),
+        ),
+      ),
+      message: state.message,
+    ));
+  }
+
+  Friend getFriendByUserId(int userId) {
+    return state.friend.entities.firstWhere(
+      (element) =>
+          (element.firstUserId == state.user.currentUser.id &&
+              element.secondUserId == userId) ||
+          (element.firstUserId == userId &&
+              element.secondUserId == state.user.currentUser.id),
+    );
+  }
+
+  List<Message> getMessagesFromConversation(int friendId) {
+    return state.message.entities
+        .where((element) => element.friendId == friendId)
+        .toList();
+  }
+
+  addMessage(Message message) {
     emit(
-        StoreState(
-          user: UserCubit(
-            entity: state.user.entity,
-            entities: state.user.entities,
-            currentUser: user,
-          ),
-          friend: state.friend,
-        )
+      StoreState(
+        user: state.user,
+        friend: state.friend,
+        message: MessageState(entities: [...state.message.entities, message]),
+      ),
     );
   }
 }
