@@ -17,53 +17,53 @@ class ScreenLogin extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(30),
-          child: Stack(
+          child: Column(
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Center(
-                    child: Text(
-                      "Log In",
-                      style: TextStyle(
-                        fontSize: 27,
-                        fontWeight: FontWeight.bold,
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Center(
+                      child: Text(
+                        "Log In",
+                        style: TextStyle(
+                          fontSize: 27,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ),
-                  SnapTextField(
-                    textController: usernameController,
-                    label: "USERNAME",
-                    obscure: false,
-                  ),
-                  SnapTextField(
-                    textController: passwordController,
-                    label: "PASSWORD",
-                    obscure: true,
-                  ),
-                  const SizedBox(height: 10),
-                ],
+                    const SizedBox(height: 30),
+                    SnapTextField(
+                      textController: usernameController,
+                      label: "USERNAME",
+                      obscure: false,
+                    ),
+                    const SizedBox(height: 30),
+                    SnapTextField(
+                      textController: passwordController,
+                      label: "PASSWORD",
+                      obscure: true,
+                    ),
+                  ],
+                ),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: ElevatedButton(
-                  onPressed: () => _goToCamera(context),
-                  style: ButtonStyle(
-                    padding: MaterialStateProperty.all(
-                      const EdgeInsets.symmetric(horizontal: 40),
-                    ),
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
+              ElevatedButton(
+                onPressed: () => _goToCamera(context),
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(
+                    const EdgeInsets.symmetric(horizontal: 40),
+                  ),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  child: const Text(
-                    "Log In",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                ),
+                child: const Text(
+                  "Log In",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),

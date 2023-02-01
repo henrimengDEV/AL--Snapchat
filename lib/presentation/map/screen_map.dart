@@ -19,11 +19,11 @@ class ScreenMap extends StatelessWidget {
     );
   }
 
-  String getBitmoji(User last) {
-    if (last.avatar != null) {
-      return FluttermojiFunctions().decodeFluttermojifromString(last.avatar!);
-    }
-
-    return "";
-  }
+  // String getBitmoji(User last) {
+  //   if (last.avatar != null) {
+  //     return FluttermojiFunctions().decodeFluttermojifromString(last.avatar!);
+  //   }
+  //
+  //   return "";
+  // }
 }

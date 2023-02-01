@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SnapTextField extends StatelessWidget {
+class SnapTextField extends StatefulWidget {
   final TextEditingController textController;
   final bool obscure;
   final String label;
@@ -14,35 +14,47 @@ class SnapTextField extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<SnapTextField> createState() => _SnapTextFieldState();
+}
+
+class _SnapTextFieldState extends State<SnapTextField> {
+  
+
+  @override
+  void initState(){
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 10),
         Text(
-          label,
+          widget.label,
           style: const TextStyle(fontSize: 14, color: Colors.blue),
         ),
-        const SizedBox(height: 5),
-        CupertinoTextField(
-          obscureText: obscure,
-          obscuringCharacter: '*',
-          placeholder: label,
-          controller: textController,
-        ),
         TextField(
-          obscureText: obscure,
+          obscureText: widget.obscure,
           obscuringCharacter: '*',
-          controller: textController,
+          controller: widget.textController,
           decoration: InputDecoration(
-            hintText: label,
-            hintStyle: TextStyle(
-              fontSize: 10,
-              color: Colors.grey,
-            )
+            suffixIcon: widget.obscure? const Icon(CupertinoIcons.eye_slash) : const Icon(CupertinoIcons.eye),
+            border: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.circular(50),
+            ),
+            contentPadding: const EdgeInsets.all(0),
           ),
-        )
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Container(color: Colors.black, height: 5, width: 1),
+            Expanded(child: Container(color: Colors.black, height: 1)),
+            Container(color: Colors.black, height: 5, width: 1),
+          ],
+        ),
       ],
     );
   }
