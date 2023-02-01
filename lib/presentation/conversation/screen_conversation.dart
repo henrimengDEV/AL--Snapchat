@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ScreenConversation extends StatelessWidget {
-  final int userId;
   static const routeName = 'screen_conversation';
+  final int userId;
 
   const ScreenConversation({
     Key? key,
