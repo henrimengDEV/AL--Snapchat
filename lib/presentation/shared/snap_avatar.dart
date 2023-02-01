@@ -4,17 +4,19 @@ import 'package:fluttermoji/fluttermoji.dart';
 
 class SnapAvatar extends StatelessWidget {
   final String avatar;
+  final double size;
 
   const SnapAvatar({
     Key? key,
     required this.avatar,
+    this.size = 50,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
-      width: 50,
+      height: size,
+      width: size,
       padding: const EdgeInsets.all(5),
       decoration: const BoxDecoration(
         color: Colors.transparent,
