@@ -43,8 +43,8 @@ class SnapBottomBar extends StatelessWidget {
     ),
     SnapBottomBarItem(
       routeName: ScreenProfile.routeName,
-      icon: Icon(Icons.accessibility),
-      selectedIcon: Icon(Icons.settings_accessibility),
+      icon: Icon(Icons.account_circle_outlined),
+      selectedIcon: Icon(Icons.account_circle),
     ),
   ];
 
