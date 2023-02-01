@@ -1,9 +1,12 @@
-import 'package:final_flutter_project/domain/user.dart';
+import 'package:final_flutter_project/domain/friend.dart';
 import 'package:final_flutter_project/persistence/store/store_cubit.dart';
-import 'package:final_flutter_project/persistence/store/user_cubit.dart';
+import 'package:final_flutter_project/presentation/profile/bitmoji/screen_bitmoji.dart';
+import 'package:final_flutter_project/presentation/shared/modal/friends_modal.dart';
+import 'package:final_flutter_project/presentation/shared/snap_title_h2.dart';
+import 'package:final_flutter_project/presentation/shared/snap_avatar.dart';
+import 'package:final_flutter_project/presentation/shared/snap_shadow_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttermoji/fluttermoji.dart';
 
 class BodyProfile extends StatefulWidget {
   const BodyProfile({Key? key}) : super(key: key);
@@ -15,37 +18,55 @@ class BodyProfile extends StatefulWidget {
 class _BodyProfileState extends State<BodyProfile> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Stack(
-        children: [
-          Column(
+    return Container(
+      color: const Color.fromRGBO(235, 235, 235, 1),
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
             children: [
-              const Text(
-                'Custom your avatar',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 22,
-                ),
+              BlocBuilder<StoreCubit, StoreState>(
+                builder: (context, state) {
+                  return SnapAvatar(
+                    avatar: state.user.currentUser.avatar!,
+                    size: 100,
+                  );
+                },
               ),
-              const Divider(),
-              Expanded(child: FluttermojiCircleAvatar()),
-              FluttermojiCustomizer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  Text(
+                    'Henri',
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
+              const SnapTitleH2(text: 'Friends'),
+              SnapShadowButton(
+                onPress: () {
+                  FriendsModal.showIt(context);
+                },
+                label: 'Add Friends',
+              ),
+              const SnapTitleH2(text: 'Bitmoji'),
+              SnapShadowButton(
+                onPress: () => _goToScreenBitmoji(context),
+                label: 'Edit my bitmoji',
+                leadingIcon: Icons.edit,
+              ),
             ],
           ),
-          ElevatedButton(
-            onPressed: () => setAvatar(context),
-            child: Text('save'),
-          ),
-        ],
+        ),
       ),
     );
   }
 
-  void setAvatar(BuildContext context) async {
-    String localBitmoji = await FluttermojiFunctions().encodeMySVGtoString();
-    print(localBitmoji);
-    context.read<StoreCubit>().updateCurrentUser(
-        context.read<StoreCubit>().state.user.currentUser
-    );
+  _goToScreenBitmoji(BuildContext context) {
+    Navigator.of(context).pushNamed(ScreenBitmoji.routeName);
   }
 }

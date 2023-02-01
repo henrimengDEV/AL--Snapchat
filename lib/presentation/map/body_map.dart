@@ -35,7 +35,7 @@ class _BodyMapState extends State<BodyMap> {
 
     //Set map theme
     DefaultAssetBundle.of(context)
-        .loadString('assets/maptheme/snap_theme.json')
+        .loadString('assets/maptheme/aubergine_theme.json')
         .then((value) {
       mapTheme = value;
     });
