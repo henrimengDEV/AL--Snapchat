@@ -7,42 +7,32 @@ import 'package:final_flutter_project/presentation/shared/container_fluid.dart';
 import 'package:flutter/material.dart';
 
 class BodyCamera extends StatefulWidget {
-  const BodyCamera({Key? key}) : super(key: key);
+
+  const BodyCamera({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<BodyCamera> createState() => _BodyCameraState();
 }
 
 class _BodyCameraState extends State<BodyCamera> {
-  late List<CameraDescription> _cameras;
   late CameraController _controller;
+  late Future<void> _initializeControllerFuture;
 
   @override
   void initState() {
     super.initState();
-    _cameras = CameraProvider.instance.cameras;
-    if (_cameras.isEmpty) return;
+    asyncInit();
+  }
+
+  asyncInit() {
     _controller = CameraController(
-      _cameras[0],
-      ResolutionPreset.max,
+      CameraProvider.instance.firstCamera,
+      ResolutionPreset.veryHigh,
     );
-    _controller.initialize().then((_) {
-      if (!mounted) {
-        return;
-      }
-      setState(() {});
-    }).catchError((Object e) {
-      if (e is CameraException) {
-        switch (e.code) {
-          case 'CameraAccessDenied':
-          // Handle access errors here.
-            break;
-          default:
-          // Handle other errors here.
-            break;
-        }
-      }
-    });
+
+    _initializeControllerFuture = _controller.initialize();
   }
 
   @override
@@ -66,18 +56,19 @@ class _BodyCameraState extends State<BodyCamera> {
   }
 
   Widget previewCamera() {
-    if (_cameras.isEmpty) {
-      return Container(
-        width: double.infinity,
-        height: double.infinity,
-        color: Colors.black87,
-      );
-    }
-
-    return SizedBox(
-      height: double.infinity,
-      width: double.infinity,
-      child: CameraPreview(_controller),
+    return FutureBuilder<void>(
+      future: _initializeControllerFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return SizedBox(
+            height: double.infinity,
+            width: double.infinity,
+            child: CameraPreview(_controller),
+          );
+        } else {
+          return const Center(child: CircularProgressIndicator());
+        }
+      },
     );
   }
 }

@@ -9,8 +9,8 @@ class ScreenCamera extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
         body: BodyCamera(),
-        bottomNavigationBar: const SnapBottomBar(routeActivated: routeName));
+        bottomNavigationBar: SnapBottomBar(routeActivated: routeName));
   }
 }
