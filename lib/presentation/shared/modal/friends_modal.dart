@@ -1,7 +1,7 @@
 import 'package:final_flutter_project/file_utils.dart';
 import 'package:final_flutter_project/persistence/store/store_cubit.dart';
 import 'package:final_flutter_project/presentation/shared/snap_avatar.dart';
-import 'package:final_flutter_project/presentation/shared/snap_title_h2.dart';
+import 'package:final_flutter_project/presentation/shared/snap_title_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -42,7 +42,7 @@ class FriendsModal extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SnapTitleH2(text: 'Quick Add'),
+                const SnapTitleDivider(text: 'Quick Add'),
                 Container(
                   decoration: BoxDecoration(
                       color: Colors.white,

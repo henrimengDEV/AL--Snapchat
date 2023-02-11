@@ -6,7 +6,7 @@ class SnapTextField extends StatelessWidget {
   final bool obscure;
   final String label;
 
-  SnapTextField({
+  const SnapTextField({
     Key? key,
     required this.textController,
     required this.label,
