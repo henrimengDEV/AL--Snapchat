@@ -1,5 +1,5 @@
 import 'package:camera/camera.dart';
-import 'package:final_flutter_project/persistence/camera_provider.dart';
+import 'package:final_flutter_project/persistence/provider/camera_provider.dart';
 import 'package:final_flutter_project/presentation/camera/floating_bottom_actions_camera.dart';
 import 'package:final_flutter_project/presentation/camera/floating_top_left_actions_camera.dart';
 import 'package:final_flutter_project/presentation/camera/floating_top_right_actions_camera.dart';

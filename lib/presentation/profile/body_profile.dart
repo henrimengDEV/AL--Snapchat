@@ -1,7 +1,7 @@
 import 'package:final_flutter_project/domain/friend.dart';
 import 'package:final_flutter_project/persistence/store/store_cubit.dart';
 import 'package:final_flutter_project/presentation/profile/bitmoji/screen_bitmoji.dart';
-import 'package:final_flutter_project/presentation/shared/modal/friends_modal.dart';
+import 'package:final_flutter_project/presentation/shared/modal/friends_modal/friends_modal.dart';
 import 'package:final_flutter_project/presentation/shared/snap_title_h2.dart';
 import 'package:final_flutter_project/presentation/shared/snap_avatar.dart';
 import 'package:final_flutter_project/presentation/shared/snap_shadow_button.dart';

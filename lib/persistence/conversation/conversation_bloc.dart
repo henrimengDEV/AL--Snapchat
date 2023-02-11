@@ -1,0 +1,46 @@
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:final_flutter_project/domain/conversation.dart';
+
+part 'conversation_event.dart';
+part 'conversation_state.dart';
+
+class ConversationBloc extends Bloc<ConversationEvent, ConversationState> {
+  ConversationBloc() : super(const ConversationInitial()) {
+    on<FetchAllConversation>(_onFetchAllConversation);
+    on<FetchOneConversation>(_onFetchOneConversation);
+    on<CreateConversation>(_onCreateConversation);
+    on<UpdateConversation>(_onUpdateConversation);
+    on<RemoveConversation>(_onRemoveConversation);
+    on<ResetAllConversation>(_onResetAllConversation);
+    on<ResetOneConversation>(_onResetOneConversation);
+  }
+
+  _onFetchAllConversation(FetchAllConversation event, Emitter<ConversationState> emit) {
+    print('FetchAllConversation');
+  }
+
+  _onFetchOneConversation(FetchOneConversation event, Emitter<ConversationState> emit) {
+    print('FetchAllConversation');
+  }
+
+  _onCreateConversation(CreateConversation event, Emitter<ConversationState> emit) {
+    print('CreateConversation');
+  }
+
+  _onUpdateConversation(UpdateConversation event, Emitter<ConversationState> emit) {
+    print('UpdateConversation');
+  }
+
+  _onRemoveConversation(RemoveConversation event, Emitter<ConversationState> emit) {
+    print('RemoveConversation');
+  }
+
+  _onResetAllConversation(ResetAllConversation event, Emitter<ConversationState> emit) {
+    print('ResetAllConversation');
+  }
+
+  _onResetOneConversation(ResetOneConversation event, Emitter<ConversationState> emit) {
+    print('ResetOneConversation');
+  }
+}

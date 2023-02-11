@@ -1,5 +1,7 @@
+import 'package:final_flutter_project/persistence/user/user_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'auth/login/screen_login.dart';
 import 'auth/sign_up/screen_sign_up.dart';
@@ -42,7 +44,7 @@ class ScreenSnapchat extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: 20),
+                const SizedBox(width: 20),
                 ElevatedButton(
                   onPressed: () => _goSignup(context),
                   style: ButtonStyle(
@@ -52,7 +54,7 @@ class ScreenSnapchat extends StatelessWidget {
                       ),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     "Sign Up",
                     style: TextStyle(
                       fontSize: 20,
@@ -64,6 +66,12 @@ class ScreenSnapchat extends StatelessWidget {
             )
           ],
         ),
+      ),
+      floatingActionButton: IconButton(
+        icon: const Icon(Icons.cabin),
+        onPressed: () {
+          context.read<UserBloc>().add(ResetAllUser());
+        },
       ),
     );
   }

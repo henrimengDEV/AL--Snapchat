@@ -29,58 +29,58 @@ class StoreCubit extends Cubit<StoreState> {
   List<User> getFriendsOfCurrentUser() {
     return state.user.entities
         .where((user) => state.friend.entities.any((element) =>
-            element.firstUserId == state.user.currentUser.id &&
-            element.secondUserId == user.id))
+            element.sourceUser == state.user.currentUser.id &&
+            element.targetUser == user.id))
         .toList();
   }
 
   List<User> getFriendSuggestionsOfCurrentUser() {
     return state.user.entities
         .where((user) => !state.friend.entities.any((element) =>
-            element.firstUserId == state.user.currentUser.id &&
-            element.secondUserId == user.id))
+            element.sourceUser == state.user.currentUser.id &&
+            element.targetUser == user.id))
         .toList();
   }
 
-  addFriend(User user) {
-    final bool areAlreadyFriend = state.friend.entities.any(
-      (element) =>
-          element.firstUserId == state.user.currentUser.id &&
-          element.secondUserId == user.id,
-    );
+  // addFriend(User user) {
+  //   final bool areAlreadyFriend = state.friend.entities.any(
+  //     (element) =>
+  //         element.sourceUser == state.user.currentUser.id &&
+  //         element.targetUser == user.id,
+  //   );
+  //
+  //   if (areAlreadyFriend) return;
+  //
+  //   emit(
+  //     StoreState(
+  //       user: state.user,
+  //       friend: FriendState(
+  //         entities: [
+  //           ...state.friend.entities,
+  //           Friend(
+  //             id: 1,
+  //             sourceUser: state.user.currentUser.id,
+  //             targetUser: user.id,
+  //           )
+  //         ],
+  //         entity: state.friend.entity,
+  //       ),
+  //       message: state.message,
+  //     ),
+  //   );
+  // }
 
-    if (areAlreadyFriend) return;
-
-    emit(
-      StoreState(
-        user: state.user,
-        friend: FriendState(
-          entities: [
-            ...state.friend.entities,
-            Friend(
-              id: 1,
-              firstUserId: state.user.currentUser.id,
-              secondUserId: user.id,
-            )
-          ],
-          entity: state.friend.entity,
-        ),
-        message: state.message,
-      ),
-    );
-  }
-
-  addUser(User user) => emit(
-        StoreState(
-          user: UserState(
-            entity: state.user.entity,
-            entities: [...state.user.entities, user],
-            currentUser: state.user.currentUser,
-          ),
-          friend: state.friend,
-          message: state.message,
-        ),
-      );
+  // addUser(User user) => emit(
+  //       StoreState(
+  //         user: UserState(
+  //           entity: state.user.entity,
+  //           entities: [...state.user.entities, user],
+  //           currentUser: state.user.currentUser,
+  //         ),
+  //         friend: state.friend,
+  //         message: state.message,
+  //       ),
+  //     );
 
   updateCurrentUser(User user) {
     emit(StoreState(
@@ -101,10 +101,10 @@ class StoreCubit extends Cubit<StoreState> {
         entities: state.friend.entities,
         entity: state.friend.entities.firstWhere(
           (element) =>
-              (element.firstUserId == state.user.currentUser.id &&
-                  element.secondUserId == userId) ||
-              (element.firstUserId == userId &&
-                  element.secondUserId == state.user.currentUser.id),
+              (element.sourceUser == state.user.currentUser.id &&
+                  element.targetUser == userId) ||
+              (element.sourceUser == userId &&
+                  element.targetUser == state.user.currentUser.id),
         ),
       ),
       message: state.message,
@@ -114,10 +114,10 @@ class StoreCubit extends Cubit<StoreState> {
   Friend getFriendByUserId(int userId) {
     return state.friend.entities.firstWhere(
       (element) =>
-          (element.firstUserId == state.user.currentUser.id &&
-              element.secondUserId == userId) ||
-          (element.firstUserId == userId &&
-              element.secondUserId == state.user.currentUser.id),
+          (element.sourceUser == state.user.currentUser.id &&
+              element.targetUser == userId) ||
+          (element.sourceUser == userId &&
+              element.targetUser == state.user.currentUser.id),
     );
   }
 
