@@ -1,4 +1,4 @@
-import 'package:final_flutter_project/domain/user.dart';
+import 'package:final_flutter_project/domain/user/user.dart';
 import 'package:final_flutter_project/presentation/map/body_map.dart';
 import 'package:final_flutter_project/presentation/shared/snap_bottom_bar.dart';
 import 'package:flutter/material.dart';

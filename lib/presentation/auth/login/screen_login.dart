@@ -1,5 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:final_flutter_project/domain/firebase/user_firebase.dart';
+import 'package:final_flutter_project/file_utils.dart';
+import 'package:final_flutter_project/persistence/session/session_bloc.dart';
 import 'package:final_flutter_project/presentation/shared/snap_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../camera/screen_camera.dart';
 
@@ -47,7 +53,7 @@ class ScreenLogin extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: ElevatedButton(
-                  onPressed: () => _goToCamera(context),
+                  onPressed: () => _onLogInClick(context),
                   style: ButtonStyle(
                     padding: MaterialStateProperty.all(
                       const EdgeInsets.symmetric(horizontal: 40),
@@ -74,7 +80,31 @@ class ScreenLogin extends StatelessWidget {
     );
   }
 
-  _goToCamera(BuildContext context) {
-    Navigator.of(context).pushNamed(ScreenCamera.routeName);
+  _onLogInClick(BuildContext context) {
+    try {
+      FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+        email: usernameController.text,
+        password: passwordController.text,
+      )
+          .then(
+        (value) {
+          FirebaseFirestore.instance
+              .collection("users")
+              .doc(value.user!.uid)
+              .snapshots()
+              .map((event) => UserFirebase.fromJson(event.data()!))
+              .first
+              .then(
+            (user) {
+              context.read<SessionBloc>().add(LogIn(user: user));
+              FileUtils.goTo(context, ScreenCamera.routeName);
+            },
+          );
+        },
+      );
+    } catch (e) {
+      print('error :');
+    }
   }
 }

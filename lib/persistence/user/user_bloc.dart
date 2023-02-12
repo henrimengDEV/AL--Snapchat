@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:final_flutter_project/common/mock_user.dart';
-import 'package:final_flutter_project/domain/user.dart';
+import 'package:final_flutter_project/domain/firebase/user_firebase.dart';
+import 'package:final_flutter_project/domain/user/user.dart';
+import 'package:final_flutter_project/persistence/user/firebase_user_repository.dart';
 
 part 'user_event.dart';
 
@@ -20,41 +22,42 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   _onFetchAllUser(FetchAllUser event, Emitter<UserState> emit) {
     print('FetchAllUser');
-    emit(state.copyWith(entities: MockUser.entities));
+    // emit(state.copyWith(entities: MockUser.entities));
   }
 
   _onFetchOneUser(FetchOneUser event, Emitter<UserState> emit) {
     print('FetchAllUser');
-    emit(state.copyWith(entity: MockUser.entity));
+    // emit(state.copyWith(entity: MockUser.entity));
   }
 
   _onCreateUser(CreateUser event, Emitter<UserState> emit) {
     print('CreateUser');
-    emit(state.copyWith(
-      entities: [...state.entities, event.user],
-      entity: event.user,
-    ));
+    // emit(state.copyWith(
+    //   entities: [...state.entities, event.user],
+    //   entity: event.user,
+    // ));
   }
 
   _onUpdateUser(UpdateUser event, Emitter<UserState> emit) {
     print('UpdateUser');
+    emit(state.copyWith(entity: event.userFirebase));
   }
 
   _onRemoveUser(RemoveUser event, Emitter<UserState> emit) {
     print('RemoveUser');
-    emit(state.copyWith(
-      entities:
-          state.entities.where((element) => element.id != event.id).toList(),
-    ));
+    // emit(state.copyWith(
+    //   entities:
+    //       state.entities.where((element) => element.id != event.id).toList(),
+    // ));
   }
 
   _onResetAllUser(ResetAllUser event, Emitter<UserState> emit) {
     print('ResetAllUser');
-    emit(state.copyWith(entities: const UserInitial().entities));
+    // emit(state.copyWith(entities: const UserInitial().entities));
   }
 
   _onResetOneUser(ResetOneUser event, Emitter<UserState> emit) {
     print('ResetOneMessage');
-    emit(state.copyWith(entity: const UserInitial().entity));
+    // emit(state.copyWith(entity: const UserInitial().entity));
   }
 }

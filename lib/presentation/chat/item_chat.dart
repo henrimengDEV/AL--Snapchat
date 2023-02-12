@@ -1,20 +1,24 @@
-import 'package:final_flutter_project/domain/user.dart';
+import 'package:final_flutter_project/domain/firebase/conversation_firebase.dart';
+import 'package:final_flutter_project/domain/firebase/user_firebase.dart';
+import 'package:final_flutter_project/domain/user/user.dart';
+import 'package:final_flutter_project/persistence/conversation/conversation_bloc.dart';
 import 'package:final_flutter_project/presentation/conversation/screen_conversation.dart';
 import 'package:final_flutter_project/presentation/shared/snap_avatar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../persistence/user/user_bloc.dart';
+
 class ItemChat extends StatelessWidget {
-  final User item;
+  final UserFirebase item;
+  final ConversationFirebase conversationFirebase;
 
-  static ButtonStyle buttonStyle = ButtonStyle(
-    foregroundColor: MaterialStateProperty.all(Colors.black),
-    padding: MaterialStateProperty.all(
-      const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-    ),
-  );
-
-  const ItemChat({Key? key, required this.item}) : super(key: key);
+  const ItemChat({
+    Key? key,
+    required this.item,
+    required this.conversationFirebase,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +40,19 @@ class ItemChat extends StatelessWidget {
     );
   }
 
+  static ButtonStyle buttonStyle = ButtonStyle(
+    foregroundColor: MaterialStateProperty.all(Colors.black),
+    padding: MaterialStateProperty.all(
+      const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+    ),
+  );
+
   _goToScreenConversation(BuildContext context) {
-    Navigator.of(context).pushNamed(
-      ScreenConversation.routeName,
-      arguments: item.id,
-    );
+    context.read<UserBloc>().add(UpdateUser(userFirebase: item));
+    context.read<ConversationBloc>().add(UpdateConversation(
+          conversationFirebase: conversationFirebase,
+        ));
+    Navigator.of(context).pushNamed(ScreenConversation.routeName);
   }
 
   Widget _getAvatar(context) {

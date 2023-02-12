@@ -1,17 +1,17 @@
-import 'package:final_flutter_project/domain/user.dart';
+import 'package:final_flutter_project/domain/user/user.dart';
 import 'package:flutter/foundation.dart';
 
 @immutable
 class Friend {
   final int id;
-  final User sourceUser;
-  final User targetUser;
+  final User sourceUserId;
+  final User targetUserId;
   final DateTime createdAt;
 
   const Friend({
     required this.id,
-    required this.sourceUser,
-    required this.targetUser,
+    required this.sourceUserId,
+    required this.targetUserId,
     required this.createdAt,
   });
 
@@ -22,9 +22,11 @@ class Friend {
   }) {
     return Friend(
       id: id,
-      sourceUser: sourceUser ?? this.sourceUser,
-      targetUser: targetUser ?? this.targetUser,
+      sourceUserId: sourceUser ?? this.sourceUserId,
+      targetUserId: targetUser ?? this.targetUserId,
       createdAt: createdAt ?? this.createdAt,
     );
   }
+
+
 }

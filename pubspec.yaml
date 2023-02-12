@@ -44,10 +44,15 @@ dependencies:
   google_maps_flutter: ^2.2.3
   google_maps_flutter_web: ^0.4.0+5
   http: ^0.13.5
-  json_serializable: ^6.6.0
+  json_serializable: ^6.6.1
 
   # Date picker plugin
   flutter_holo_date_picker: ^1.1.0
+  firebase_core: ^2.5.0
+  cloud_firestore: ^4.3.2
+  json_annotation: ^4.8.0
+  cloud_firestore_odm: ^1.0.0-dev.46
+  firebase_auth: ^4.2.6
 
 
 dev_dependencies:

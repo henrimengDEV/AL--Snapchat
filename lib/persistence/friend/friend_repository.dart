@@ -2,8 +2,8 @@ import 'package:final_flutter_project/common/data_provider.dart';
 import 'package:final_flutter_project/common/mock_friend.dart';
 import 'package:final_flutter_project/domain/friend.dart';
 
-class FriendProvider {
-  const FriendProvider();
+class FriendRepository {
+  const FriendRepository();
 
   Future<Friend> createData(Friend newData) {
     return Future.delayed(

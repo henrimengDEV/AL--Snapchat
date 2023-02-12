@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:final_flutter_project/domain/conversation.dart';
+import 'package:final_flutter_project/domain/firebase/conversation_firebase.dart';
 
 part 'conversation_event.dart';
 part 'conversation_state.dart';
@@ -30,6 +31,7 @@ class ConversationBloc extends Bloc<ConversationEvent, ConversationState> {
 
   _onUpdateConversation(UpdateConversation event, Emitter<ConversationState> emit) {
     print('UpdateConversation');
+    emit(state.copyWith(entity: event.conversationFirebase));
   }
 
   _onRemoveConversation(RemoveConversation event, Emitter<ConversationState> emit) {

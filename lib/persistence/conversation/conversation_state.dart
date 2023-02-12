@@ -5,12 +5,18 @@ enum ConversationStatus { initial, success, failure, loading }
 abstract class ConversationState extends Equatable {
   final ConversationStatus status;
   final List<Conversation> entities;
-  final Conversation? entity;
+  final ConversationFirebase? entity;
 
   const ConversationState({
     required this.status,
     required this.entities,
     this.entity,
+  });
+
+  ConversationState copyWith({
+    ConversationStatus? status,
+    List<Conversation>? entities,
+    ConversationFirebase? entity,
   });
 }
 
@@ -21,10 +27,11 @@ class ConversationInitial extends ConversationState {
     super.entity,
   });
 
+  @override
   ConversationInitial copyWith({
     ConversationStatus? status,
     List<Conversation>? entities,
-    Conversation? entity,
+    ConversationFirebase? entity,
   }) {
     return ConversationInitial(
       status: status ?? this.status,

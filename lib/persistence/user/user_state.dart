@@ -5,7 +5,7 @@ enum UserStatus { initial, success, failure, loading }
 abstract class UserState extends Equatable {
   final UserStatus status;
   final List<User> entities;
-  final User? entity;
+  final UserFirebase? entity;
 
   const UserState({
     required this.status,
@@ -16,7 +16,7 @@ abstract class UserState extends Equatable {
   UserState copyWith({
     UserStatus? status,
     List<User>? entities,
-    User? entity,
+    UserFirebase? entity,
   });
 }
 
@@ -31,7 +31,7 @@ class UserInitial extends UserState {
   UserInitial copyWith({
     UserStatus? status,
     List<User>? entities,
-    User? entity,
+    UserFirebase? entity,
   }) {
     return UserInitial(
       status: status ?? this.status,

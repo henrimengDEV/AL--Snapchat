@@ -1,4 +1,6 @@
 import 'package:final_flutter_project/domain/friend.dart';
+import 'package:final_flutter_project/file_utils.dart';
+import 'package:final_flutter_project/persistence/session/session_bloc.dart';
 import 'package:final_flutter_project/persistence/store/store_cubit.dart';
 import 'package:final_flutter_project/presentation/profile/bitmoji/screen_bitmoji.dart';
 import 'package:final_flutter_project/presentation/shared/modal/friends_modal/friends_modal.dart';
@@ -25,21 +27,25 @@ class _BodyProfileState extends State<BodyProfile> {
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-              BlocBuilder<StoreCubit, StoreState>(
+              BlocBuilder<SessionBloc, SessionState>(
                 builder: (context, state) {
-                  return SnapAvatar(
-                    avatar: state.user.currentUser.avatar!,
-                    size: 100,
-                  );
+                  if (state.user != null && state.user!.avatar != null) {
+                    return SnapAvatar(
+                      avatar: state.user!.avatar!,
+                      size: 100,
+                    );
+                  }
+
+                  return const Center(child: CircularProgressIndicator());
                 },
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
+                children: [
                   Text(
-                    'Henri',
-                    style: TextStyle(
+                    context.read<SessionBloc>().state.user!.pseudo,
+                    style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w700,
                     ),
@@ -55,7 +61,7 @@ class _BodyProfileState extends State<BodyProfile> {
               ),
               const SnapTitleH2(text: 'Bitmoji'),
               SnapShadowButton(
-                onPress: () => _goToScreenBitmoji(context),
+                onPress: () => FileUtils.goTo(context, ScreenBitmoji.routeName),
                 label: 'Edit my bitmoji',
                 leadingIcon: Icons.edit,
               ),
@@ -64,9 +70,5 @@ class _BodyProfileState extends State<BodyProfile> {
         ),
       ),
     );
-  }
-
-  _goToScreenBitmoji(BuildContext context) {
-    Navigator.of(context).pushNamed(ScreenBitmoji.routeName);
   }
 }

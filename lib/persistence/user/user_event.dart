@@ -15,7 +15,10 @@ class CreateUser extends UserEvent {
   final User user;
   const CreateUser({required this.user});
 }
-class UpdateUser extends UserEvent {}
+class UpdateUser extends UserEvent {
+  final UserFirebase userFirebase;
+  const UpdateUser({required this.userFirebase});
+}
 
 class RemoveUser extends UserEvent {
   final int id;

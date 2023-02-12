@@ -1,7 +1,7 @@
 import 'package:camera/camera.dart';
 
 class CameraProvider {
-  late CameraDescription firstCamera;
+  late CameraDescription? firstCamera;
   static final CameraProvider _instance = CameraProvider._internal();
 
   CameraProvider._internal();

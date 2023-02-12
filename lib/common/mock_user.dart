@@ -1,4 +1,4 @@
-import 'package:final_flutter_project/domain/user.dart';
+import 'package:final_flutter_project/domain/user/user.dart';
 
 class MockUser {
   static const String defaultAvatar =
@@ -6,103 +6,103 @@ class MockUser {
 
   static List<User> entities = [
       User(
-        id: 1000,
+        id: '1000',
         pseudo: 'Teemo',
         avatar: defaultAvatar,
         createAt: DateTime.now(),
       ),
       User(
-        id: 1001,
+        id: '1001',
         pseudo: 'Annie',
         avatar: defaultAvatar,
         createAt: DateTime.now(),
       ),
       User(
-        id: 1002,
+        id: '1002',
         pseudo: 'Nasus',
         avatar: defaultAvatar,
         createAt: DateTime.now(),
       ),
       User(
-        id: 1003,
+        id: '1003',
         pseudo: 'Echo',
         avatar: defaultAvatar,
         createAt: DateTime.now(),
       ),
       User(
-        id: 1004,
+        id: '1004',
         pseudo: 'Nidalee',
         avatar: defaultAvatar,
         createAt: DateTime.now(),
       ),
       User(
-        id: 1005,
+        id: '1005',
         pseudo: 'Sivir',
         avatar: defaultAvatar,
         createAt: DateTime.now(),
       ),
       User(
-        id: 1006,
+        id: '1006',
         pseudo: 'Riven',
         avatar: defaultAvatar,
         createAt: DateTime.now(),
       ),
       User(
-        id: 1007,
+        id: '1007',
         pseudo: 'Caitlyn',
         avatar: defaultAvatar,
         createAt: DateTime.now(),
       ),
       User(
-        id: 1008,
+        id: '1008',
         pseudo: "Vel'Koz",
         avatar: defaultAvatar,
         createAt: DateTime.now(),
       ),
       User(
-        id: 1009,
+        id: '1009',
         pseudo: 'Jax',
         avatar: defaultAvatar,
         createAt: DateTime.now(),
       ),
       User(
-        id: 1010,
+        id: '1010',
         pseudo: "Rek'Sai",
         avatar: defaultAvatar,
         createAt: DateTime.now(),
       ),
       User(
-        id: 1011,
+        id: '1011',
         pseudo: 'Darius',
         avatar: defaultAvatar,
         createAt: DateTime.now(),
       ),
       User(
-        id: 1012,
+        id: '1012',
         pseudo: 'Syndra',
         avatar: defaultAvatar,
         createAt: DateTime.now(),
       ),
       User(
-        id: 1013,
+        id: '1013',
         pseudo: 'Leblanc',
         avatar: defaultAvatar,
         createAt: DateTime.now(),
       ),
       User(
-        id: 1014,
+        id: '1014',
         pseudo: 'Lucian',
         avatar: defaultAvatar,
         createAt: DateTime.now(),
       ),
       User(
-        id: 1015,
+        id: '1015',
         pseudo: 'Lulu',
         avatar: defaultAvatar,
         createAt: DateTime.now(),
       ),
       User(
-        id: 1016,
+        id: '1016',
         pseudo: 'Blitzcrank',
         avatar: defaultAvatar,
         createAt: DateTime.now(),

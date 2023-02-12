@@ -1,5 +1,19 @@
 part of 'session_bloc.dart';
 
 abstract class SessionEvent extends Equatable {
-  const SessionEvent();
+  @override
+  List<Object> get props => [];
+}
+
+class LogIn extends SessionEvent {
+  final UserFirebase user;
+  LogIn({required this.user});
+}
+
+class LogOut extends SessionEvent {}
+
+class SetUser extends SessionEvent {
+  final User user;
+
+  SetUser(this.user);
 }

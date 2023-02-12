@@ -67,17 +67,7 @@ class ScreenSnapchat extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: IconButton(
-        icon: const Icon(Icons.cabin),
-        onPressed: () {
-          context.read<UserBloc>().add(ResetAllUser());
-        },
-      ),
     );
-  }
-
-  _goBack(BuildContext context) {
-    Navigator.of(context).pushNamed(ScreenCamera.routeName);
   }
 
   _goLogin(BuildContext context) {

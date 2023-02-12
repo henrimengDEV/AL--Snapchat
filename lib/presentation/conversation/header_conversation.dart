@@ -1,6 +1,9 @@
-import 'package:final_flutter_project/domain/user.dart';
+import 'package:final_flutter_project/domain/firebase/user_firebase.dart';
+import 'package:final_flutter_project/domain/user/user.dart';
 import 'package:final_flutter_project/file_utils.dart';
+import 'package:final_flutter_project/persistence/session/session_bloc.dart';
 import 'package:final_flutter_project/persistence/store/store_cubit.dart';
+import 'package:final_flutter_project/persistence/user/user_bloc.dart';
 import 'package:final_flutter_project/presentation/shared/snap_avatar.dart';
 import 'package:final_flutter_project/presentation/shared/snap_group_icons.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,7 +15,7 @@ class HeaderConversation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final User currentUser = context.read<StoreCubit>().state.user.currentUser;
+    final UserFirebase currentUser = context.read<UserBloc>().state.entity!;
 
     return SafeArea(
       child: Padding(

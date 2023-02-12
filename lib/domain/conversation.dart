@@ -1,10 +1,10 @@
 import 'package:final_flutter_project/domain/message.dart';
-import 'package:final_flutter_project/domain/user.dart';
+import 'package:final_flutter_project/domain/user/user.dart';
 import 'package:flutter/foundation.dart';
 
 @immutable
 class Conversation {
-  final int id;
+  final String id;
   final List<User> users;
   final List<Message> messages;
   final DateTime createdAt;

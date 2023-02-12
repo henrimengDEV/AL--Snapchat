@@ -9,8 +9,8 @@ class MockFriend {
       final int index = MockUser.entities.indexOf(e);
       return Friend(
         id: 1,
-        sourceUser: e,
-        targetUser: MockUser.entities[index + 1],
+        sourceUserId: e,
+        targetUserId: MockUser.entities[index + 1],
         createdAt: DateTime.now(),
       );
     },

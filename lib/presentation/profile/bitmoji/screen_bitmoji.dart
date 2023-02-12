@@ -1,5 +1,5 @@
-import 'package:final_flutter_project/domain/user.dart';
-import 'package:final_flutter_project/persistence/store/store_cubit.dart';
+import 'package:final_flutter_project/domain/user/user.dart';
+import 'package:final_flutter_project/persistence/session/session_bloc.dart';
 import 'package:final_flutter_project/presentation/profile/bitmoji/body_bitmoji.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,11 +34,9 @@ class ScreenBitmoji extends StatelessWidget {
 
   void setAvatar(BuildContext context) async {
     String localBitmoji = await FluttermojiFunctions().encodeMySVGtoString();
-    StoreCubit store = context.read<StoreCubit>();
-    store.updateCurrentUser(User(
-      id: store.state.user.currentUser.id,
-      pseudo: store.state.user.currentUser.pseudo,
-      avatar: localBitmoji,
-    ));
+    SessionBloc sessionState = context.read<SessionBloc>();
+    // sessionState.add(
+    //   SetUser(sessionState.state.user!.copyWith(avatar: localBitmoji)),
+    // );
   }
 }

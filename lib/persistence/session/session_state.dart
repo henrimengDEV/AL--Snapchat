@@ -1,14 +1,14 @@
 part of 'session_bloc.dart';
 
 abstract class SessionState extends Equatable {
-  final User? user;
+  final UserFirebase? user;
 
   const SessionState({
     required this.user,
   });
 
   SessionState copyWith({
-    User? user,
+    UserFirebase? user,
   });
 }
 
@@ -18,7 +18,9 @@ class SessionInitial extends SessionState {
   });
 
   @override
-  SessionInitial copyWith({User? user}) {
+  SessionInitial copyWith({
+    UserFirebase? user,
+  }) {
     return SessionInitial(
       user: user ?? this.user,
     );
