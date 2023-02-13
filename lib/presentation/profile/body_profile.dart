@@ -1,12 +1,11 @@
-import 'package:final_flutter_project/domain/friend.dart';
 import 'package:final_flutter_project/file_utils.dart';
 import 'package:final_flutter_project/persistence/session/session_bloc.dart';
-import 'package:final_flutter_project/persistence/store/store_cubit.dart';
 import 'package:final_flutter_project/presentation/profile/bitmoji/screen_bitmoji.dart';
+import 'package:final_flutter_project/presentation/screen_snapchat.dart';
 import 'package:final_flutter_project/presentation/shared/modal/friends_modal/friends_modal.dart';
-import 'package:final_flutter_project/presentation/shared/snap_title_h2.dart';
 import 'package:final_flutter_project/presentation/shared/snap_avatar.dart';
 import 'package:final_flutter_project/presentation/shared/snap_shadow_button.dart';
+import 'package:final_flutter_project/presentation/shared/snap_title_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,9 +28,9 @@ class _BodyProfileState extends State<BodyProfile> {
             children: [
               BlocBuilder<SessionBloc, SessionState>(
                 builder: (context, state) {
-                  if (state.user != null && state.user!.avatar != null) {
+                  if (state.user != null) {
                     return SnapAvatar(
-                      avatar: state.user!.avatar!,
+                      avatar: state.user!.avatar,
                       size: 100,
                     );
                   }
@@ -52,23 +51,34 @@ class _BodyProfileState extends State<BodyProfile> {
                   ),
                 ],
               ),
-              const SnapTitleH2(text: 'Friends'),
+              const SnapTitleDivider(text: 'Friends'),
               SnapShadowButton(
                 onPress: () {
                   FriendsModal.showIt(context);
                 },
                 label: 'Add Friends',
               ),
-              const SnapTitleH2(text: 'Bitmoji'),
+              const SnapTitleDivider(text: 'Bitmoji'),
               SnapShadowButton(
                 onPress: () => FileUtils.goTo(context, ScreenBitmoji.routeName),
                 label: 'Edit my bitmoji',
                 leadingIcon: Icons.edit,
+              ),
+              const SnapTitleDivider(text: 'Account'),
+              SnapShadowButton(
+                onPress: () => _logOut(context),
+                label: 'Log out',
+                leadingIcon: Icons.logout,
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  _logOut(BuildContext context) {
+    FileUtils.goTo(context, ScreenSnapchat.routeName);
+    context.read<SessionBloc>().add(LogOut());
   }
 }

@@ -26,4 +26,9 @@ class UserFirebase {
     pseudo: json['pseudo'],
     createAt: (json['createAt'] as Timestamp).toDate(),
   );
+
+  @override
+  String toString() {
+    return 'UserFirebase{id: $id, pseudo: $pseudo, createAt: $createAt}';
+  }
 }

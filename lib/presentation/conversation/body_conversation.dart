@@ -14,11 +14,11 @@ class BodyConversation extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
-        children: const [
-          HeaderConversation(),
-          Divider(thickness: 1),
-          Expanded(child: FeedConversation()),
-          Divider(thickness: 1),
+        children: [
+          const HeaderConversation(),
+          const Divider(thickness: 1),
+          const Expanded(child: FeedConversation()),
+          const Divider(thickness: 1),
           FooterConversation(),
         ],
       ),

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_flutter_project/domain/firebase/user_firebase.dart';
 import 'package:final_flutter_project/file_utils.dart';
 import 'package:final_flutter_project/presentation/shared/modal/friends_modal/item_friends_modal.dart';
-import 'package:final_flutter_project/presentation/shared/snap_title_h2.dart';
+import 'package:final_flutter_project/presentation/shared/snap_title_divider.dart';
 import 'package:flutter/material.dart';
 
 class FriendsModal extends StatelessWidget {
@@ -10,18 +10,11 @@ class FriendsModal extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      builder: (context) => FriendsModal(),
+      builder: (context) => const FriendsModal(),
     );
   }
 
-  Stream<List<UserFirebase>> _usersStream() =>
-      FirebaseFirestore.instance.collection('users').snapshots().map(
-            (snapshot) => snapshot.docs
-                .map((doc) => UserFirebase.fromJson(doc.data()))
-                .toList(),
-          );
-
-  FriendsModal({Key? key}) : super(key: key);
+  const FriendsModal({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +41,7 @@ class FriendsModal extends StatelessWidget {
                   ],
                 ),
               ),
-              const SnapTitleH2(text: 'Quick Add'),
+              const SnapTitleDivider(text: 'Quick Add'),
               Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -77,4 +70,11 @@ class FriendsModal extends StatelessWidget {
       ),
     );
   }
+
+  Stream<List<UserFirebase>> _usersStream() =>
+      FirebaseFirestore.instance.collection('users').snapshots().map(
+            (snapshot) => snapshot.docs
+            .map((doc) => UserFirebase.fromJson(doc.data()))
+            .toList(),
+      );
 }

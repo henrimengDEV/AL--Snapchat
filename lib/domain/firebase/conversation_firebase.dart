@@ -9,6 +9,18 @@ class ConversationFirebase {
     required this.users,
   });
 
+  ConversationFirebase copyWith({
+    String? id,
+    List<String>? messages,
+    List<String>? users,
+  }) {
+    return ConversationFirebase(
+      id: id ?? this.id,
+      messages: messages ?? this.messages,
+      users: users ?? this.users,
+    );
+  }
+
   Map<String, dynamic> toJson() => {
         'id': id,
         'messages': messages,
@@ -24,4 +36,9 @@ class ConversationFirebase {
         users:
             (json['users'] as List<dynamic>).map((e) => e.toString()).toList(),
       );
+
+  @override
+  String toString() {
+    return 'ConversationFirebase{id: $id, messages: $messages, users: $users}';
+  }
 }

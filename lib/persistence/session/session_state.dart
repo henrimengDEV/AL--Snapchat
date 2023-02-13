@@ -10,6 +10,9 @@ abstract class SessionState extends Equatable {
   SessionState copyWith({
     UserFirebase? user,
   });
+
+  @override
+  List<Object> get props => [user != null];
 }
 
 class SessionInitial extends SessionState {
@@ -27,5 +30,5 @@ class SessionInitial extends SessionState {
   }
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [super.user != null];
 }

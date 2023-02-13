@@ -18,6 +18,13 @@ abstract class UserState extends Equatable {
     List<User>? entities,
     UserFirebase? entity,
   });
+
+  @override
+  List<Object> get props => [
+    status,
+    entities,
+    entity != null
+  ];
 }
 
 class UserInitial extends UserState {
@@ -44,5 +51,6 @@ class UserInitial extends UserState {
   List<Object> get props => [
     status,
     entities,
+    entity != null
   ];
 }

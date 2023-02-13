@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:final_flutter_project/common/mock_user.dart';
 import 'package:final_flutter_project/domain/firebase/user_firebase.dart';
 import 'package:final_flutter_project/domain/user/user.dart';
 
@@ -24,9 +23,7 @@ _onLogIn(LogIn event, Emitter<SessionState> emit) {
 
 _onLogOut(LogOut event, Emitter<SessionState> emit) {
   print('LogOut');
-  emit(const SessionInitial(
-      user: null
-  ));
+  emit(const SessionInitial());
 }
 
 _onSetUser(SetUser event, Emitter<SessionState> emit) {

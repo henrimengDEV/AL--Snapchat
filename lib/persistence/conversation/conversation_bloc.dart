@@ -31,6 +31,7 @@ class ConversationBloc extends Bloc<ConversationEvent, ConversationState> {
 
   _onUpdateConversation(UpdateConversation event, Emitter<ConversationState> emit) {
     print('UpdateConversation');
+    print(event.conversationFirebase.toString());
     emit(state.copyWith(entity: event.conversationFirebase));
   }
 
@@ -40,9 +41,11 @@ class ConversationBloc extends Bloc<ConversationEvent, ConversationState> {
 
   _onResetAllConversation(ResetAllConversation event, Emitter<ConversationState> emit) {
     print('ResetAllConversation');
+    emit(const ConversationInitial());
   }
 
   _onResetOneConversation(ResetOneConversation event, Emitter<ConversationState> emit) {
     print('ResetOneConversation');
+    emit(const ConversationInitial());
   }
 }

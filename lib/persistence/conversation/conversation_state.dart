@@ -18,6 +18,13 @@ abstract class ConversationState extends Equatable {
     List<Conversation>? entities,
     ConversationFirebase? entity,
   });
+
+  @override
+  List<Object> get props => [
+        status,
+        entities,
+        entity != null,
+      ];
 }
 
 class ConversationInitial extends ConversationState {
@@ -41,5 +48,9 @@ class ConversationInitial extends ConversationState {
   }
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [
+        super.status,
+        super.entities,
+        super.entity != null,
+      ];
 }

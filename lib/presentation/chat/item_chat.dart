@@ -1,6 +1,5 @@
 import 'package:final_flutter_project/domain/firebase/conversation_firebase.dart';
 import 'package:final_flutter_project/domain/firebase/user_firebase.dart';
-import 'package:final_flutter_project/domain/user/user.dart';
 import 'package:final_flutter_project/persistence/conversation/conversation_bloc.dart';
 import 'package:final_flutter_project/presentation/conversation/screen_conversation.dart';
 import 'package:final_flutter_project/presentation/shared/snap_avatar.dart';
@@ -60,6 +59,6 @@ class ItemChat extends StatelessWidget {
       return SvgPicture.defaultPlaceholderBuilder(context);
     }
 
-    return SnapAvatar(avatar: item.avatar!);
+    return SnapAvatar(avatar: item.avatar);
   }
 }

@@ -1,12 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:final_flutter_project/common/mock_user.dart';
 import 'package:final_flutter_project/domain/firebase/user_firebase.dart';
 import 'package:final_flutter_project/domain/user/user.dart';
-import 'package:final_flutter_project/persistence/user/firebase_user_repository.dart';
 
 part 'user_event.dart';
-
 part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
@@ -57,7 +54,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }
 
   _onResetOneUser(ResetOneUser event, Emitter<UserState> emit) {
-    print('ResetOneMessage');
-    // emit(state.copyWith(entity: const UserInitial().entity));
+    print('ResetOneUser');
+    emit(const UserInitial());
   }
 }

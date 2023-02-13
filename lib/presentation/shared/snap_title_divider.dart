@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class SnapTitleH2 extends StatelessWidget {
+class SnapTitleDivider extends StatelessWidget {
   final String text;
 
-  const SnapTitleH2({
+  const SnapTitleDivider({
     Key? key,
     required this.text,
   }) : super(key: key);

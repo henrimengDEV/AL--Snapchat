@@ -1,77 +1,78 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:final_flutter_project/common/mock_user.dart';
 import 'package:final_flutter_project/domain/firebase/user_firebase.dart';
-import 'package:final_flutter_project/domain/user/user.dart';
-import 'package:final_flutter_project/presentation/shared/snap_text_field.dart';
+import 'package:final_flutter_project/presentation/auth/sign_up/page_confirm_sign_up.dart';
+import 'package:final_flutter_project/presentation/auth/sign_up/page_password_sign_up.dart';
+import 'package:final_flutter_project/presentation/auth/sign_up/page_username_sign_up.dart';
+import 'package:final_flutter_project/presentation/profile/bitmoji/body_bitmoji.dart';
+import 'package:final_flutter_project/presentation/screen_snapchat.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttermoji/fluttermojiFunctions.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../form_birthday/screen_birthday.dart';
+import 'page_birthday_sign_up.dart';
 
-class ScreenSignUp extends StatelessWidget {
+class ScreenSignUp extends StatefulWidget {
   static const routeName = 'screen_sign_up';
-  final TextEditingController firstNameController = TextEditingController();
-  final TextEditingController lastNameController = TextEditingController();
 
-  ScreenSignUp({Key? key}) : super(key: key);
+  const ScreenSignUp({Key? key}) : super(key: key);
+
+  @override
+  State<ScreenSignUp> createState() => _ScreenSignUpState();
+}
+
+class _ScreenSignUpState extends State<ScreenSignUp> {
+  final PageController pageViewController = PageController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  String username = "";
+  DateTime birthday = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: const IconThemeData(
+          color: Colors.grey,
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(30),
-          child: Stack(
+          child: Column(
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Center(
-                    child: Text(
-                      "What's your name ?",
-                      style: TextStyle(
-                        fontSize: 27,
-                        fontWeight: FontWeight.bold,
-                      ),
+              Expanded(
+                child: PageView(
+                  controller: pageViewController,
+                  children: [
+                    PageUsernameSignUp(
+                      usernameController: usernameController,
+                      onUsernameChange: onUsernameChange,
                     ),
-                  ),
-                  SnapTextField(
-                    textController: firstNameController,
-                    label: "FIRST NAME",
-                    obscure: false,
-                  ),
-                  SnapTextField(
-                    textController: lastNameController,
-                    label: "LAST NAME",
-                    obscure: false,
-                  ),
-                  const SizedBox(height: 10),
-                ],
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: ElevatedButton(
-                  onPressed: () => _goToBirthday(context),
-                  style: ButtonStyle(
-                    padding: MaterialStateProperty.all(
-                      const EdgeInsets.symmetric(horizontal: 40),
+                    PageCredentialSignUp(
+                      emailController: emailController,
+                      passwordController: passwordController,
                     ),
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
+                    PageBirthdaySignUp(
+                      onSelectedDateChange: onSelectedBirthdayChange,
                     ),
-                  ),
-                  child: const Text(
-                    "Sign Up",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                    const BodyBitmoji(),
+                    PageConfirmSignUp(
+                      username: usernameController.text,
+                      cancelForm: cancelForm,
+                      validForm: validForm,
                     ),
-                  ),
+                  ],
                 ),
+              ),
+              const SizedBox(height: 50),
+              SmoothPageIndicator(
+                controller: pageViewController,
+                count: 5,
+                effect: const WormEffect(),
               ),
             ],
           ),
@@ -80,22 +81,47 @@ class ScreenSignUp extends StatelessWidget {
     );
   }
 
-  _goToBirthday(BuildContext context) {
-    // FirebaseAuth.instance
-    //     .createUserWithEmailAndPassword(
-    //   email: 'henri@mail.com',
-    //   password: 'pouetpouet',
-    // )
-    //     .then((value) {
-    //   FirebaseFirestore.instance.collection('users').doc(value.user!.uid).set(
-    //         UserFirebase(
-    //           id: value.user!.uid,
-    //           avatar: MockUser.defaultAvatar,
-    //           pseudo: 'henri@mail.com',
-    //           createAt: DateTime.now(),
-    //         ).toJson(),
-    //       );
-    // });
-    Navigator.of(context).pushNamed(ScreenBirthday.routeName);
+  onSelectedBirthdayChange(DateTime dateTime) {
+    setState(() {
+      birthday = dateTime;
+    });
+  }
+
+  onUsernameChange(String username) {
+    setState(() {
+      username = username;
+    });
+  }
+
+  cancelForm() {
+    print('cancelForm');
+    // FluttermojiFunctions().decodeFluttermojifromString(MockUser.defaultAvatar);
+    Navigator.of(context).pushNamed(ScreenSnapchat.routeName);
+  }
+
+  Future<void> validForm() async {
+    print(emailController.text);
+    print(passwordController.text);
+    print(usernameController.text);
+    print(birthday);
+    String localBitmoji = await FluttermojiFunctions().encodeMySVGtoString();
+
+    FirebaseAuth.instance
+        .createUserWithEmailAndPassword(
+      email: emailController.text,
+      password: passwordController.text,
+    )
+        .then((value) {
+      FirebaseFirestore.instance.collection('users').doc(value.user!.uid).set(
+            UserFirebase(
+              id: value.user!.uid,
+              avatar: localBitmoji,
+              pseudo: usernameController.text,
+              createAt: DateTime.now(),
+            ).toJson(),
+          );
+    }).then(
+      (value) => Navigator.of(context).pushNamed(PageBirthdaySignUp.routeName),
+    );
   }
 }

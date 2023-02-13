@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_flutter_project/domain/firebase/conversation_firebase.dart';
 import 'package:final_flutter_project/domain/firebase/friend_firebase.dart';
 import 'package:final_flutter_project/domain/firebase/user_firebase.dart';
+import 'package:final_flutter_project/file_utils.dart';
 import 'package:final_flutter_project/persistence/session/session_bloc.dart';
 import 'package:final_flutter_project/presentation/shared/snap_avatar.dart';
 import 'package:flutter/material.dart';
@@ -56,11 +57,16 @@ class ItemFriendsModal extends StatelessWidget {
         users: [context.read<SessionBloc>().state.user!.id, user.id],
       ).toJson(),
     );
+
     _conversationsCollection.add(
       ConversationFirebase(
         messages: [],
         users: [context.read<SessionBloc>().state.user!.id, user.id],
       ).toJson(),
-    );
+    ).then((value) {
+      _conversationsCollection.doc(value.id).update({
+        'id': value.id,
+      });
+    }).then((value) => FileUtils.goBack(context));
   }
 }

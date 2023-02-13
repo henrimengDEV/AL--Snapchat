@@ -1,14 +1,18 @@
-import 'package:final_flutter_project/persistence/user/user_bloc.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'auth/login/screen_login.dart';
 import 'auth/sign_up/screen_sign_up.dart';
-import 'camera/screen_camera.dart';
 
 class ScreenSnapchat extends StatelessWidget {
-  const ScreenSnapchat({Key? key}) : super(key: key);
+  static const routeName = 'screen_snapchat';
+
+  final pillButtonStyle = MaterialStateProperty.all(
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20),
+    ),
+  );
+
+  ScreenSnapchat({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +33,11 @@ class ScreenSnapchat extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () => _goLogin(context),
                   style: ButtonStyle(
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
+                    backgroundColor: MaterialStateProperty.all(Colors.white),
+                    padding: MaterialStateProperty.all(
+                      const EdgeInsets.symmetric(horizontal: 30),
                     ),
+                    shape: pillButtonStyle,
                   ),
                   child: const Text(
                     "Log In",
@@ -48,17 +52,16 @@ class ScreenSnapchat extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () => _goSignup(context),
                   style: ButtonStyle(
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
+                    padding: MaterialStateProperty.all(
+                      const EdgeInsets.symmetric(horizontal: 30),
                     ),
+                    shape: pillButtonStyle,
                   ),
                   child: const Text(
                     "Sign Up",
                     style: TextStyle(
                       fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
