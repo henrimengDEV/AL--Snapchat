@@ -60,7 +60,6 @@ class FriendsModal extends StatelessWidget {
                           Text("Error: ${snapshotFriends.error}");
                         }
                         if (!snapshotFriends.hasData) {
-                          print(snapshotFriends.hasData);
                           return const Center(
                             child: CircularProgressIndicator(),
                           );
