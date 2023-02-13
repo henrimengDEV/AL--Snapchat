@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:final_flutter_project/domain/firebase/conversation_firebase.dart';
 import 'package:final_flutter_project/domain/firebase/message_firebase.dart';
 import 'package:final_flutter_project/file_utils.dart';
 import 'package:final_flutter_project/persistence/conversation/conversation_bloc.dart';
@@ -54,8 +55,6 @@ class FooterConversation extends StatelessWidget {
   }
 
   _onSubmitted(BuildContext context, String value) async {
-    if (!context.mounted) return;
-
     CollectionReference messagesCollection =
         FirebaseFirestore.instance.collection('messages');
 
@@ -71,20 +70,22 @@ class FooterConversation extends StatelessWidget {
 
     ConversationBloc currentConversation = context.read<ConversationBloc>();
 
-    currentConversation.add(UpdateConversation(
-      conversationFirebase: currentConversation.state.entity!.copyWith(
-        messages: [
-          ...currentConversation.state.entity!.messages,
-          newMessage.id
-        ],
-      ),
-    ));
-
-    await FirebaseFirestore.instance
+    FirebaseFirestore.instance
         .collection('conversations')
         .doc(currentConversation.state.entity!.id)
-        .update({
-      'messages': [...currentConversation.state.entity!.messages, newMessage.id]
+        .snapshots()
+        .map((event) => ConversationFirebase.fromJson(event.data()!))
+        .first
+        .then((value) {
+      FirebaseFirestore.instance
+          .collection('conversations')
+          .doc(currentConversation.state.entity!.id)
+          .update({
+        'messages': [
+          ...value.messages,
+          newMessage.id,
+        ]
+      });
     });
 
     controller.text = "";

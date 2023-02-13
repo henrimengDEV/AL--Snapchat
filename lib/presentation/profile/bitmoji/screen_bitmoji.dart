@@ -1,14 +1,30 @@
-import 'package:final_flutter_project/domain/user/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_flutter_project/persistence/session/session_bloc.dart';
 import 'package:final_flutter_project/presentation/profile/bitmoji/body_bitmoji.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttermoji/fluttermoji.dart';
 
-class ScreenBitmoji extends StatelessWidget {
+class ScreenBitmoji extends StatefulWidget {
   static const routeName = 'screen_bitmoji';
 
   const ScreenBitmoji({Key? key}) : super(key: key);
+
+  @override
+  State<ScreenBitmoji> createState() => _ScreenBitmojiState();
+}
+
+class _ScreenBitmojiState extends State<ScreenBitmoji> {
+
+  @override
+  void initState() {
+    asyncInit();
+    super.initState();
+  }
+
+  asyncInit() async {
+    await FluttermojiFunctions().clearFluttermoji();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +51,9 @@ class ScreenBitmoji extends StatelessWidget {
   void setAvatar(BuildContext context) async {
     String localBitmoji = await FluttermojiFunctions().encodeMySVGtoString();
     SessionBloc sessionState = context.read<SessionBloc>();
-    // sessionState.add(
-    //   SetUser(sessionState.state.user!.copyWith(avatar: localBitmoji)),
-    // );
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(sessionState.state.user!.id)
+        .update({'avatar': localBitmoji}).then((value) => print('EZAEZA'));
   }
 }

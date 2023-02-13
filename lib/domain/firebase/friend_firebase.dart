@@ -14,6 +14,6 @@ class FriendFirebase {
 
   static FriendFirebase fromJson(Map<String, dynamic> json) => FriendFirebase(
     id: json['id'],
-    users: json['users'],
+    users: (json['users'] as List<dynamic>).map((e) => e.toString()).toList(),
   );
 }

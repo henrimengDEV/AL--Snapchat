@@ -4,7 +4,9 @@ import 'package:final_flutter_project/domain/firebase/friend_firebase.dart';
 import 'package:final_flutter_project/domain/firebase/user_firebase.dart';
 import 'package:final_flutter_project/file_utils.dart';
 import 'package:final_flutter_project/persistence/session/session_bloc.dart';
+import 'package:final_flutter_project/presentation/shared/pill_button.dart';
 import 'package:final_flutter_project/presentation/shared/snap_avatar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,26 +29,12 @@ class ItemFriendsModal extends StatelessWidget {
       children: [
         SnapAvatar(avatar: user.avatar),
         Expanded(child: Text(user.pseudo)),
-        Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 10,
-            vertical: 0,
-          ),
-          decoration: BoxDecoration(
-            color: Colors.black12,
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(25),
-          ),
-          child: GestureDetector(
-            onTap: () => handleAddClick(context),
-            child: Row(
-              children: const [
-                Icon(Icons.add, size: 15),
-                Text('Add'),
-              ],
-            ),
-          ),
-        )
+        PillButton(
+          onPressed: () => handleAddClick(context),
+          label: 'Add',
+          icon: CupertinoIcons.person_add_solid,
+        ),
+        const SizedBox(width: 15),
       ],
     );
   }
@@ -56,9 +44,14 @@ class ItemFriendsModal extends StatelessWidget {
       FriendFirebase(
         users: [context.read<SessionBloc>().state.user!.id, user.id],
       ).toJson(),
-    );
+    ).then((value) {
+      _friendsCollection.doc(value.id).update({
+        'id': value.id,
+      });
+    });
 
-    _conversationsCollection.add(
+    _conversationsCollection
+        .add(
       ConversationFirebase(
         messages: [],
         users: [context.read<SessionBloc>().state.user!.id, user.id],
@@ -67,6 +60,6 @@ class ItemFriendsModal extends StatelessWidget {
       _conversationsCollection.doc(value.id).update({
         'id': value.id,
       });
-    }).then((value) => FileUtils.goBack(context));
+    });
   }
 }

@@ -31,7 +31,7 @@ class HeaderChat extends StatelessWidget {
           ),
         ),
         SnapIcon(
-          icon: CupertinoIcons.person_crop_circle_fill_badge_plus,
+          icon: CupertinoIcons.person_add_solid,
           onPressed: () => FriendsModal.showIt(context),
         ),
         const SizedBox(width: 10),

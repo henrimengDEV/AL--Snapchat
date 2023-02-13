@@ -28,7 +28,7 @@ _onLogOut(LogOut event, Emitter<SessionState> emit) {
 
 _onSetUser(SetUser event, Emitter<SessionState> emit) {
   print('SetUser');
-  // emit(SessionInitial(
-  //     user: event.user
-  // ));
+  emit(SessionInitial(
+      user: event.user
+  ));
 }

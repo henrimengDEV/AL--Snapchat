@@ -13,7 +13,7 @@ class LogIn extends SessionEvent {
 class LogOut extends SessionEvent {}
 
 class SetUser extends SessionEvent {
-  final User user;
+  final UserFirebase user;
 
   SetUser(this.user);
 }

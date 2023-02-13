@@ -24,9 +24,9 @@ class FeedConversation extends StatelessWidget {
   }
 
   Widget _messages(BuildContext context, ConversationState state) {
-    if (state.entity!.messages.isEmpty) {
-      return const Text("");
-    }
+    // if (state.entity!.messages.isEmpty) {
+    //   return const Text("");
+    // }
 
     return BlocBuilder<ConversationBloc, ConversationState>(
       builder: (_, state) {
@@ -49,7 +49,6 @@ class FeedConversation extends StatelessWidget {
               stream: messages(context, snapshotConversation.data!.messages),
               builder: (_, snapshotMessages) {
                 if (snapshotMessages.hasError) {
-                  print(snapshotMessages.error.toString());
                   return Text(snapshotMessages.error.toString());
                 }
                 if (!snapshotMessages.hasData) {
@@ -59,13 +58,17 @@ class FeedConversation extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Column(
                     children: snapshotMessages.data!
+                        .where((element) => snapshotConversation
+                            .data!.messages
+                            .contains(element.id))
                         .map(
-                          (e) => Padding(
-                            padding: const EdgeInsets.only(bottom: 12),
-                            child: ItemConversation(message: e),
-                          ),
-                        )
-                        .toList(),
+                      (e) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 12),
+                          child: ItemConversation(message: e),
+                        );
+                      },
+                    ).toList(),
                   ),
                 );
               },
@@ -81,10 +84,6 @@ class FeedConversation extends StatelessWidget {
     return FirebaseFirestore.instance
         .collection("messages")
         .orderBy("createAt", descending: false)
-        .where(
-          "id",
-          whereIn: messages,
-        )
         .snapshots()
         .map(
           (snapshot) => snapshot.docs
